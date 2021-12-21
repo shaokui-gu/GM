@@ -121,5 +121,15 @@ extension GM {
         return GMDevice.current.deviceID
     }
 
+    /// app 平台
+    static var platform:String {
+       return "ios"
+    }
+    
+    /// 设备系统
+    static var osVersion:String {
+        return "\(UIDevice.current.model) \(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
+    }
+    
 }
 
