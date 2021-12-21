@@ -18,7 +18,11 @@ let package = Package(
     targets: [
         .target(
             name: "GM",
-            dependencies: [],
+            dependencies: [
+                "OpenUDID",
+                "KeychainItemWrapper",
+                "MBProgressHUD"
+            ],
             path: "Sources"
         )
     ]
