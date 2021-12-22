@@ -3,12 +3,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "GM",
+    name: "GMX",
     platforms: [
         .iOS(.v13),
     ],
     products: [
-        .library(name: "GM", targets: ["GM"])
+        .library(name: "GMX", targets: ["GMX"])
     ],
     dependencies: [
         .package(url: "https://github.com/shaokui-gu/OpenUDID.git", from: "1.0.1"),
@@ -17,7 +17,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "GM",
+            name: "GMX",
             dependencies: [
                 "OpenUDID",
                 "KeychainItemWrapper",
@@ -26,7 +26,7 @@ let package = Package(
             path: "Sources"
         ),
         .testTarget(
-            name: "GMTests",
-            dependencies: ["GM"]),
+            name: "GMXTests",
+            dependencies: ["GMX"]),
     ]
 )
