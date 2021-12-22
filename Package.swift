@@ -24,6 +24,9 @@ let package = Package(
                 "MBProgressHUD"
             ],
             path: "Sources"
-        )
+        ),
+        .testTarget(
+            name: "GMTests",
+            dependencies: ["GM"]),
     ]
 )
