@@ -448,42 +448,42 @@ extension UIViewController {
 
 extension GM {
     
-    static let RouteErrorLogPrefix = "【 ROUTER ERROR 】:"
+    public static let RouteErrorLogPrefix = "【 ROUTER ERROR 】:"
     
-    static let RouteLogPrefix = "【 ROUTER 】:"
+    public static let RouteLogPrefix = "【 ROUTER 】:"
 
-    static var routes:[Router.Page] {
+    public static var routes:[Router.Page] {
         return Router.shared.routes
     }
     
     /// 注册
-    static func registerPages(_ pages:[Router.RoutePage]) {
+    public static func registerPages(_ pages:[Router.RoutePage]) {
         Router.shared.registerPages(pages)
     }
     
     /// 代理
-    static func setRouterDelegate(_ delegate:RouterDelegate) {
+    public static func setRouterDelegate(_ delegate:RouterDelegate) {
         Router.shared.delegate = delegate
     }
     
     /// 对应路由名称的RoutePage
-    static func routePageFor(_ name:String) -> Router.RoutePage? {
+    public static func routePageFor(_ name:String) -> Router.RoutePage? {
         return Router.shared.routePageFor(name)
     }
     
-    static func rootPage() -> Router.Page? {
+    public static func rootPage() -> Router.Page? {
         return Router.shared.root
     }
     
-    static func topPage() -> Router.Page? {
+    public static func topPage() -> Router.Page? {
         return Router.shared.current
     }
     
-    static func setRoot(_ page:Router.Page) {
+    public static func setRoot(_ page:Router.Page) {
         Router.shared.root = page
     }
     
-    static func toNamed(_ name:String, id:AnyHashable? = nil, params:[String : Any]? = nil, useRootNavigation:Bool = false, animated:Bool? = nil, completion:VoidCallBack? = nil) {
+    public static func toNamed(_ name:String, id:AnyHashable? = nil, params:[String : Any]? = nil, useRootNavigation:Bool = false, animated:Bool? = nil, completion:VoidCallBack? = nil) {
         do {
             try Router.shared.toNamed(name, id: id, params: params, useRootNavigation: useRootNavigation, animated: animated, completion: completion)
         } catch {
@@ -493,7 +493,7 @@ extension GM {
         }
     }
     
-    static func offToNamed(_ name:String, id:AnyHashable? = nil, params:[String : Any]? = nil, useRootNavigation:Bool = false, animated:Bool? = nil, completion:VoidCallBack? = nil)  {
+    public static func offToNamed(_ name:String, id:AnyHashable? = nil, params:[String : Any]? = nil, useRootNavigation:Bool = false, animated:Bool? = nil, completion:VoidCallBack? = nil)  {
         do {
             try Router.shared.offToNamed(name, id: id, params: params, useRootNavigation: useRootNavigation, animated: animated, completion: completion)
         } catch {
@@ -503,7 +503,7 @@ extension GM {
         }
     }
 
-    static func toModalNamed(_ name:String, id:AnyHashable? = nil, params:[String : Any]? = nil, transition:UIModalTransitionStyle? = nil, presentation:UIModalPresentationStyle? = nil, enablePullBack:Bool = true, animated:Bool? = nil, completion:VoidCallBack? = nil)  {
+    public static func toModalNamed(_ name:String, id:AnyHashable? = nil, params:[String : Any]? = nil, transition:UIModalTransitionStyle? = nil, presentation:UIModalPresentationStyle? = nil, enablePullBack:Bool = true, animated:Bool? = nil, completion:VoidCallBack? = nil)  {
         do {
             try Router.shared.toModalNamed(name, id: id, params: params, transition: transition, presentation: presentation, enablePullBack: enablePullBack, animated: animated, completion: completion)
         } catch {
@@ -513,7 +513,7 @@ extension GM {
         }
     }
     
-    static func back(animated: Bool = true, completion:VoidCallBack? = nil)  {
+    public static func back(animated: Bool = true, completion:VoidCallBack? = nil)  {
         do {
             try Router.shared.back(animated: animated, completion: completion)
         } catch {
@@ -523,7 +523,7 @@ extension GM {
         }
     }
     
-    static func backTo(_ name:String, id:AnyHashable? = nil, animated: Bool = true, completion:VoidCallBack? = nil) {
+    public static func backTo(_ name:String, id:AnyHashable? = nil, animated: Bool = true, completion:VoidCallBack? = nil) {
         do {
             try Router.shared.backTo(name, id: id, animated: animated, completion: completion)
         } catch {
