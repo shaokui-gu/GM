@@ -12,8 +12,7 @@ public protocol StateObjectProtocol {
     var identifire:String { get set }
 }
 
-public class States {
-    
+class States {
     public class Weak {
       weak var value : NSObject?
       init (value: NSObject) {
@@ -49,14 +48,14 @@ extension GM {
     
     /// 添加状态
     /// - Parameter state: 状态
-    static func put<T:NSObject>(_ state:T) {
+    public static func put<T:NSObject>(_ state:T) {
         GM.log(GM.StateLogPrefix, "添加状态", state)
         States.shared.put(state)
     }
     
     /// 删除状态
     /// - Parameter state: 状态
-    static func pop<T:NSObject>(_ state:T) {
+    public static func pop<T:NSObject>(_ state:T) {
         GM.log(GM.StateLogPrefix, "删除状态", state)
         States.shared.pop(state)
     }
@@ -66,7 +65,7 @@ extension GM {
     ///   - state: 状态类型
     ///   - identifire: 状态id
     /// - Returns: 状态
-    static func find<T:StateObjectProtocol>(_ state:T.Type, identifire:String) -> T? {
+    public static func find<T:StateObjectProtocol>(_ state:T.Type, identifire:String) -> T? {
         let result = States.shared.all.filter { state in
             return (state.value as? T)?.identifire == identifire
         }.last
@@ -76,7 +75,7 @@ extension GM {
     /// 查找状态
     /// - Parameter state: 状态类型
     /// - Returns: 状态
-    static func find<T:NSObject>(_ state:T.Type) -> T? {
+    public static func find<T:NSObject>(_ state:T.Type) -> T? {
         let result = States.shared.all.filter { state in
             return state.value is T
         }.last

@@ -276,13 +276,13 @@ private final class GMPopOverDelegation: NSObject, UIPopoverPresentationControll
     
 }
 
-class GMPopoverView : UIViewController, GMPopOverUsable {
-    var contentSize: CGSize = CGSize(width:200, height:174)
-    var arrowDirection: UIPopoverArrowDirection = .none
-    var layoutMargins: UIEdgeInsets = .zero
-    var content:UIViewController
-    var dismissHandler:VoidCallBack?
-    var onDismiss:VoidCallBack? {
+public class GMPopoverView : UIViewController, GMPopOverUsable {
+    public var contentSize: CGSize = CGSize(width:200, height:174)
+    public var arrowDirection: UIPopoverArrowDirection = .none
+    public var layoutMargins: UIEdgeInsets = .zero
+    public var content:UIViewController
+    public var dismissHandler:VoidCallBack?
+    public var onDismiss:VoidCallBack? {
         return self.dismissHandler
     }
     
@@ -307,13 +307,13 @@ class GMPopoverView : UIViewController, GMPopOverUsable {
     }
 }
 
-class GMPopoverSwiftUIView<Content>: UIHostingController<Content>, GMPopOverUsable where Content : View {
+public class GMPopoverSwiftUIView<Content>: UIHostingController<Content>, GMPopOverUsable where Content : View {
     
-    var contentSize: CGSize = CGSize(width:200, height:174)
-    var arrowDirection: UIPopoverArrowDirection = .none
-    var layoutMargins: UIEdgeInsets = .zero
-    var dismissHandler:VoidCallBack?
-    var onDismiss:VoidCallBack? {
+    public var contentSize: CGSize = CGSize(width:200, height:174)
+    public var arrowDirection: UIPopoverArrowDirection = .none
+    public var layoutMargins: UIEdgeInsets = .zero
+    public var dismissHandler:VoidCallBack?
+    public var onDismiss:VoidCallBack? {
         return self.dismissHandler
     }
     

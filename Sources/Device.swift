@@ -59,25 +59,25 @@ extension GM {
     }
     
     /// 微微震动
-    static func shakeSoft() {
+    public static func shakeSoft() {
         GMDevice.current.softImpack.prepare()
         GMDevice.current.softImpack.impactOccurred()
     }
     
     /// 强烈震动
-    static func shakeHeavy() {
+    public static func shakeHeavy() {
         GMDevice.current.heavyImpack.prepare()
         GMDevice.current.heavyImpack.impactOccurred()
     }
     
     /// 默认震动
-    static func shake() {
+    public static func shake() {
         GMDevice.current.defaultImpack.prepare()
         GMDevice.current.defaultImpack.impactOccurred()
     }
     
     /// 安全区域
-   static  var safeArea:UIEdgeInsets {
+    public static  var safeArea:UIEdgeInsets {
         get {
             return GMDevice.current.safeArea
         }
@@ -87,7 +87,7 @@ extension GM {
     }
     
     /// 屏幕尺寸
-    static var windowSize:CGSize {
+    public static var windowSize:CGSize {
         get {
             return GMDevice.current.windowSize
         }
@@ -97,7 +97,7 @@ extension GM {
     }
     
     /// 安全区域尺寸
-    static var safeAreaSize:CGSize  {
+    public static var safeAreaSize:CGSize  {
         get {
             return GMDevice.current.safeAreaSize
         }
@@ -107,27 +107,27 @@ extension GM {
     }
     
     /// 系统是否是中文
-    static var isChinese:Bool {
+    public static var isChinese:Bool {
         return  GMDevice.current.isChinese
     }
     
     /// 获取系统语言
-    static func systemLanguage() -> String {
+    public static func systemLanguage() -> String {
         return  GMDevice.current.systemLanguage()
      }
     
     /// 设备ID
-    static var deviceID:String {
+    public static var deviceID:String {
         return GMDevice.current.deviceID
     }
 
     /// app 平台
-    static var platform:String {
+    public static var platform:String {
        return "ios"
     }
     
     /// 设备系统
-    static var osVersion:String {
+    public static var osVersion:String {
         return "\(UIDevice.current.model) \(UIDevice.current.systemName) \(UIDevice.current.systemVersion)"
     }
     

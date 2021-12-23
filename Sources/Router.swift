@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 /// 任意参数无返回值
-typealias AnyCallBack = (Any) -> Void
+public typealias AnyCallBack = (Any) -> Void
 
 /// 无参数无返回值
-typealias VoidCallBack  = () -> Void
+public typealias VoidCallBack  = () -> Void
 
 /// 布尔参数无返回值
 typealias BoolCallBack = (Bool) -> Void
@@ -42,7 +42,7 @@ public protocol RouterDelegate {
 public class Router {
     
     /// 错误码
-    enum RouteErrorCode : Int {
+    public enum RouteErrorCode : Int {
         case notSetRoot = 100
         case notFound = 404
         case notSupport = 405
@@ -50,7 +50,7 @@ public class Router {
     }
 
     /// 错误描述
-    enum RouteErrorDescription  : String {
+    public enum RouteErrorDescription  : String {
         case notSetRoot = "根路由未设置"
         case notFound = "路由不存在"
         case notSupport = "不支持此方式切换路由"
@@ -58,7 +58,7 @@ public class Router {
     }
     
     /// 错误
-    struct RouteError : Error {
+    public struct RouteError : Error {
         let code:Int
         let msg:String
         init(code:Int, msg:String) {
@@ -87,22 +87,22 @@ public class Router {
     }
     
     /// 一个命名路由界面
-    struct RoutePage {
+    public struct RoutePage {
         
         /// 路由名称
-        var name:String
+        public var name:String
     
         /// page构造器
-        var page:([String : Any ]?) -> UIViewController
+        public var page:([String : Any ]?) -> UIViewController
         
         /// controller 如果是persent的，transiton方式
-        var transition:UIModalTransitionStyle?
+        public var transition:UIModalTransitionStyle?
         
         /// controller 如果是persent的，present方式
-        var presentation:UIModalPresentationStyle?
+        public var presentation:UIModalPresentationStyle?
         
         /// 界面跳转时是否带动画
-        var animated:Bool
+        public var animated:Bool
         
         init(name:String, page:@escaping ([String : Any ]?) -> UIViewController, transition:UIModalTransitionStyle? = nil, presentation:UIModalPresentationStyle? = nil, animated:Bool = true) {
             self.name = name
@@ -113,9 +113,9 @@ public class Router {
         }
     }
     
-    struct Page : Equatable {
+    public struct Page : Equatable {
         
-        let identifire = UUID().uuidString
+        public let identifire = UUID().uuidString
         
         /// 路由名称
         private(set) var name:String
@@ -133,7 +133,7 @@ public class Router {
             controller.routeIdentifire = identifire
         }
         
-        static func == (lhs: Self, rhs: Self) -> Bool {
+        public static func == (lhs: Self, rhs: Self) -> Bool {
             return lhs.name == rhs.name && lhs.id == rhs.id
         }
     }

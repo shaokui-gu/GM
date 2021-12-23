@@ -10,5 +10,6 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'GM' => ['Assets/*']
   }
+  s.swift_versions = ['5.2', '5.3', '5.4']
   s.requires_arc = true
 end

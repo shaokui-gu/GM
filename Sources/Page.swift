@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-protocol GMPageLifeCycle {
+public protocol GMPageLifeCycle {
     func onPageAppear() -> Void
     func onPageDisappear()  -> Void
     func onPageInit() -> Void
@@ -18,7 +18,7 @@ protocol GMPageLifeCycle {
     func onPageBoundsUpdated(_ bounds:CGRect) -> Void
 }
 
-protocol GMViewEventProtocol {
+public protocol GMViewEventProtocol {
     
     /// 开始
     func touchesBegin() -> Void
@@ -31,30 +31,9 @@ protocol GMViewEventProtocol {
     
 }
 
-extension GMViewEventProtocol {
-    /// 开始
-    func touchesBegin() {
-        
-    }
-    /// 移动
-    func touchesMove() {
-        
-    }
-    ///  结束
-    func touchesEnd() {
-        
-    }
-    /// 取消
-    func touchesCancel() {
-        
-    }
+public class GMPage : UIViewController, GMPageLifeCycle {
 
-}
-
-class GMPage : UIViewController, GMPageLifeCycle {
-
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.onPageInit()
     }
@@ -63,25 +42,25 @@ class GMPage : UIViewController, GMPageLifeCycle {
         fatalError("init(coder:) has not been implemented")
     }
     
-    final override func viewDidLoad() {
+    final public override func viewDidLoad() {
         super.viewDidLoad()
         self.onPageLoaded()
     }
     
-    final override func viewWillAppear(_ animated: Bool) {
+    final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.onPageAppear()
     }
 
-    final override func viewDidAppear(_ animated: Bool) {
+    final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    final override func viewDidDisappear(_ animated: Bool) {
+    final public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
-    final override func viewWillDisappear(_ animated: Bool) {
+    final public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.onPageDisappear()
     }
@@ -93,18 +72,18 @@ class GMPage : UIViewController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    func onPageAppear() -> Void {}
-    func onPageDisappear()  -> Void {}
-    func onPageLoaded() -> Void {}
-    func onPageInit() -> Void {}
-    func onPageDestroy() -> Void {}
-    func onPageBoundsUpdated(_ bounds: CGRect) {}
+    public func onPageAppear() -> Void {}
+    public func onPageDisappear()  -> Void {}
+    public func onPageLoaded() -> Void {}
+    public func onPageInit() -> Void {}
+    public func onPageDestroy() -> Void {}
+    public func onPageBoundsUpdated(_ bounds: CGRect) {}
     
 }
-
-class GMNavigationPage : UINavigationController, GMPageLifeCycle {
+ 
+public class GMNavigationPage : UINavigationController, GMPageLifeCycle {
     
-    override init(rootViewController: UIViewController) {
+    public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         self.onPageInit()
     }
@@ -113,25 +92,25 @@ class GMNavigationPage : UINavigationController, GMPageLifeCycle {
         fatalError("init(coder:) has not been implemented")
     }
     
-    final override func viewDidLoad() {
+    final public override func viewDidLoad() {
         super.viewDidLoad()
         self.onPageLoaded()
     }
     
-    final override func viewWillAppear(_ animated: Bool) {
+    final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.onPageAppear()
     }
 
-    final override func viewDidAppear(_ animated: Bool) {
+    final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    final override func viewDidDisappear(_ animated: Bool) {
+    final public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
-    final override func viewWillDisappear(_ animated: Bool) {
+    final public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.onPageDisappear()
     }
@@ -143,17 +122,17 @@ class GMNavigationPage : UINavigationController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    func onPageAppear() -> Void {}
-    func onPageDisappear()  -> Void {}
-    func onPageLoaded() -> Void {}
-    func onPageInit() -> Void {}
-    func onPageDestroy() -> Void {}
-    func onPageBoundsUpdated(_ bounds: CGRect) {}
+    public func onPageAppear() -> Void {}
+    public func onPageDisappear()  -> Void {}
+    public func onPageLoaded() -> Void {}
+    public func onPageInit() -> Void {}
+    public func onPageDestroy() -> Void {}
+    public func onPageBoundsUpdated(_ bounds: CGRect) {}
 }
 
-class GMTabBarPage : UITabBarController, GMPageLifeCycle {
+public class GMTabBarPage : UITabBarController, GMPageLifeCycle {
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.onPageInit()
     }
@@ -162,25 +141,25 @@ class GMTabBarPage : UITabBarController, GMPageLifeCycle {
         fatalError("init(coder:) has not been implemented")
     }
     
-    final override func viewDidLoad() {
+    final public override func viewDidLoad() {
         super.viewDidLoad()
         self.onPageLoaded()
     }
     
-    final override func viewWillAppear(_ animated: Bool) {
+    final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.onPageAppear()
     }
 
-    final override func viewDidAppear(_ animated: Bool) {
+    final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    final override func viewDidDisappear(_ animated: Bool) {
+    final public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
-    final override func viewWillDisappear(_ animated: Bool) {
+    final public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.onPageDisappear()
     }
@@ -192,17 +171,17 @@ class GMTabBarPage : UITabBarController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    func onPageAppear() -> Void {}
-    func onPageDisappear()  -> Void {}
-    func onPageLoaded() -> Void {}
-    func onPageInit() -> Void {}
-    func onPageDestroy() -> Void {}
-    func onPageBoundsUpdated(_ bounds: CGRect) {}
+    public func onPageAppear() -> Void {}
+    public func onPageDisappear()  -> Void {}
+    public func onPageLoaded() -> Void {}
+    public func onPageInit() -> Void {}
+    public func onPageDestroy() -> Void {}
+    public func onPageBoundsUpdated(_ bounds: CGRect) {}
 }
 
-class GMListPage : UITableViewController, GMPageLifeCycle {
+public class GMListPage : UITableViewController, GMPageLifeCycle {
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.onPageInit()
     }
@@ -211,25 +190,25 @@ class GMListPage : UITableViewController, GMPageLifeCycle {
         fatalError("init(coder:) has not been implemented")
     }
     
-    final override func viewDidLoad() {
+    final public override func viewDidLoad() {
         super.viewDidLoad()
         self.onPageInit()
     }
     
-    final override func viewWillAppear(_ animated: Bool) {
+    final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.onPageAppear()
     }
 
-    final override func viewDidAppear(_ animated: Bool) {
+    final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    final override func viewDidDisappear(_ animated: Bool) {
+    final public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
-    final override func viewWillDisappear(_ animated: Bool) {
+    final public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.onPageDisappear()
     }
@@ -241,20 +220,20 @@ class GMListPage : UITableViewController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    func onPageAppear() -> Void {}
-    func onPageDisappear()  -> Void {}
-    func onPageLoaded() -> Void {}
-    func onPageInit() -> Void {}
-    func onPageDestroy() -> Void {}
-    func onPageBoundsUpdated(_ bounds: CGRect) {}
+    public func onPageAppear() -> Void {}
+    public func onPageDisappear()  -> Void {}
+    public func onPageLoaded() -> Void {}
+    public func onPageInit() -> Void {}
+    public func onPageDestroy() -> Void {}
+    public func onPageBoundsUpdated(_ bounds: CGRect) {}
 }
 
 /// Swift UI
-protocol GMSwiftUIPageView : View {
+public protocol GMSwiftUIPageView : View {
     var observedController:GMSwiftUIPageController? { get }
 }
 
-extension GMSwiftUIPageView {
+public extension GMSwiftUIPageView {
     
     var observedController:GMSwiftUIPageController? {
         return nil
@@ -269,22 +248,31 @@ extension GMSwiftUIPageView {
     }
 }
 
-class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProtocol {
+public class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProtocol {
     weak fileprivate(set) var uiViewController:UIViewController?
     weak fileprivate(set) var uiView:UIView?
     /// 绑定页面的bounds
     fileprivate(set) var bounds:CGRect = .zero
-    func onPageBoundsUpdated(_ bounds: CGRect) {
+    public func onPageBoundsUpdated(_ bounds: CGRect) {
         self.bounds = bounds
     }
-    func onPageAppear() -> Void {}
-    func onPageDisappear()  -> Void {}
-    func onPageLoaded() -> Void {}
-    func onPageInit() -> Void {}
-    func onPageDestroy() -> Void {}
+    public func onPageAppear() -> Void {}
+    public func onPageDisappear()  -> Void {}
+    public func onPageLoaded() -> Void {}
+    public func onPageInit() -> Void {}
+    public func onPageDestroy() -> Void {}
+    /// 开始
+    public func touchesBegin() {}
+    /// 移动
+    public func touchesMove() {}
+    ///  结束
+    public func touchesEnd() {}
+    /// 取消
+    public func touchesCancel() {}
+
 }
 
-class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: GMSwiftUIPageView {
+public class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: GMSwiftUIPageView {
   
     override init(rootView: Content) {
         super.init(rootView: rootView)
@@ -295,32 +283,32 @@ class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: GMSwi
         fatalError("init(coder:) has not been implemented")
     }
     
-    final override func viewDidLoad() {
+    final public override func viewDidLoad() {
         super.viewDidLoad()
         rootView.observedController?.uiView = self.view
         rootView.observedController?.onPageInit()
         rootView.observedController?.onPageLoaded()
     }
     
-    final override func viewWillAppear(_ animated: Bool) {
+    final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         rootView.observedController?.onPageAppear()
     }
 
-    final override func viewDidAppear(_ animated: Bool) {
+    final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    final override func viewDidDisappear(_ animated: Bool) {
+    final public override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
-    final override func viewWillDisappear(_ animated: Bool) {
+    final public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         rootView.observedController?.onPageDisappear()
     }
     
-    final override func viewDidLayoutSubviews() {
+    final public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         rootView.observedController?.onPageBoundsUpdated(self.view.bounds)
     }

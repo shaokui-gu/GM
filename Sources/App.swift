@@ -11,12 +11,12 @@ import OpenUDID
 
 extension GM {
     /// app 版本号
-    static var appVersion:String {
+    public static var appVersion:String {
         return (Bundle.main.infoDictionary?["CFBundleShortVersionString"]  as? String) ?? "0"
     }
         
     /// Build Version
-    static var buildVersion:String {
+    public static var buildVersion:String {
         return Bundle.main.infoDictionary!["CFBundleVersion"] as! String
     }
     

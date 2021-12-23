@@ -34,23 +34,23 @@ extension MBProgressHUD {
     }
     
     // MARK: 显示错误信息
-    class func showError(_ msg:String = "", to view:UIView?) {
+    public class func showError(_ msg:String = "", to view:UIView?) {
         self.show(msg, icon: "error.png", view: view)
     }
     
     // MARK: 显示成功信息
-    class func showSuccess(_ msg:String = "", to view:UIView?) {
+    public class func showSuccess(_ msg:String = "", to view:UIView?) {
         self.show(msg, icon: "success.png", view: view)
     }
 
     // MARK: 显示提示信息
-    class func showTips(_ msg:String = "", to view:UIView?) {
+    public class func showTips(_ msg:String = "", to view:UIView?) {
         self.show(msg, view: view)
     }
 
     // MARK: 显示一些信息
     @discardableResult
-    class func showMessage(_ msg:String = "", to view:UIView? = nil, hiddenDelay:TimeInterval? = nil) -> MBProgressHUD {
+    public class func showMessage(_ msg:String = "", to view:UIView? = nil, hiddenDelay:TimeInterval? = nil) -> MBProgressHUD {
         let view = view ?? GM.firstKeyWindow!
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
         hud.detailsLabel.text = msg
@@ -72,29 +72,29 @@ extension MBProgressHUD {
 
 extension GM {
     
-    static func showLoading(msg:String = "", view:UIView? = nil) {
+    public static func showLoading(msg:String = "", view:UIView? = nil) {
         MBProgressHUD.showMessage(msg, to: view)
     }
     
-    static func hideLoading(view:UIView? = nil) {
+    public static func hideLoading(view:UIView? = nil) {
         MBProgressHUD.hide(for: view ??  GM.firstKeyWindow!, animated: true)
     }
 
-    static func showSuccess(msg:String = "", view:UIView? = nil) {
+    public static func showSuccess(msg:String = "", view:UIView? = nil) {
         MBProgressHUD.showSuccess(msg, to: view)
     }
     
-    static func showError(msg:String = "", view:UIView? = nil) {
+    public static func showError(msg:String = "", view:UIView? = nil) {
         MBProgressHUD.showError(msg, to: view)
     }
     
-    static func showMessage(msg:String = "", view:UIView? = nil) {
+    public static func showMessage(msg:String = "", view:UIView? = nil) {
         MBProgressHUD.showTips(msg, to: view)
     }
 }
 
 extension GM {
-    static var firstKeyWindow: UIWindow? {
+    public static var firstKeyWindow: UIWindow? {
         UIApplication.shared.getFirstKeyWindow
     }
 }

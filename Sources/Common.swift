@@ -10,11 +10,11 @@ import UIKit
 
 extension UIViewController {
         
-    var topPresentedViewController: UIViewController {
+    public var topPresentedViewController: UIViewController {
         return presentedViewController?.topPresentedViewController ?? self
     }
     
-    static var rootViewController: UIViewController? {
+    public static var rootViewController: UIViewController? {
         let keyWindow = UIApplication.shared.windows.first { window in
             return window.isKeyWindow
         }
@@ -23,7 +23,7 @@ extension UIViewController {
 }
 
 extension UIApplication {
-    var getFirstKeyWindow: UIWindow? {
+    public var getFirstKeyWindow: UIWindow? {
         self.windows.first(where: { $0.isKeyWindow })
     }
 }

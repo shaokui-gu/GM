@@ -9,11 +9,10 @@
 import Foundation
 import UIKit
 
-class GM {}
+public class GM {}
 
-class GMWindow : UIWindow {
-    
-    override var rootViewController: UIViewController? {
+public class GMWindow : UIWindow {
+    public override var rootViewController: UIViewController? {
         get {
             return super.rootViewController
         }
@@ -22,7 +21,7 @@ class GMWindow : UIWindow {
         }
     }
     
-    func setRootPage(_ name:String, params:[String : Any]? = nil) {
+    public func setRootPage(_ name:String, params:[String : Any]? = nil) {
         guard let rootPage = Router.shared.routePageFor(name) else {
             assertionFailure("\(name) 页面未注册")
             return
@@ -34,8 +33,8 @@ class GMWindow : UIWindow {
     }
 }
 
-class GMAppDelegate : UIResponder, UIApplicationDelegate {
-    var window:GMWindow? {
+public class GMAppDelegate : UIResponder, UIApplicationDelegate {
+    public var window:GMWindow? {
         didSet {
             if let window = window {
                 GM.windowSize = window.bounds.size
@@ -50,8 +49,8 @@ class GMAppDelegate : UIResponder, UIApplicationDelegate {
     }
 }
 
-class  GMSceneDelegate: UIResponder, UIWindowSceneDelegate {
-    var window:GMWindow? {
+public class  GMSceneDelegate: UIResponder, UIWindowSceneDelegate {
+    public var window:GMWindow? {
         didSet {
             if let window = window {
                 GM.windowSize = window.bounds.size

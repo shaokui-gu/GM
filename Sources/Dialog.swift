@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-typealias AlertActionCallBack = (UIAlertAction) -> Void
+public typealias AlertActionCallBack = (UIAlertAction) -> Void
 
 class Dialog {
     
@@ -50,21 +50,21 @@ class Dialog {
 
 extension GM {
     
-    static var showingDialog:Bool {
+    public static var showingDialog:Bool {
         return Dialog.shared.currentDialog != nil
     }
     
-    static var dialogSourceView:UIView {
+    public static var dialogSourceView:UIView {
         return self.topPage()!.controller!.view!
     }
     
     /// alert
-    static func showAlert(title:String?, message:String?, confirmTitle:String?, confirmAction:AlertActionCallBack?, cancelTitle:String?, cancelAction:AlertActionCallBack?){
+    public static func showAlert(title:String?, message:String?, confirmTitle:String?, confirmAction:AlertActionCallBack?, cancelTitle:String?, cancelAction:AlertActionCallBack?){
         Dialog.shared.showAlert(title: title, message: message, confirmTitle: confirmTitle, confirmAction: confirmAction, cancelTitle: cancelTitle, cancelAction: cancelAction)
     }
     
     /// actionsheet
-    static func showActionSheet(title:String?, message:String?, actions:[UIAlertAction], sourceView:UIView? = nil, sourceRect:CGRect? = nil) {
+    public static func showActionSheet(title:String?, message:String?, actions:[UIAlertAction], sourceView:UIView? = nil, sourceRect:CGRect? = nil) {
         let sView = self.dialogSourceView
         let sRect = CGRect(x: sView.bounds.midX, y: sView.bounds.maxY, width: 44, height: 44)
         Dialog.shared.showActionSheet(title: title, message: message, actions: actions, sourceView: sourceView ?? sView, sourceRect: sourceRect ?? sRect)

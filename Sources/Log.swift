@@ -10,15 +10,15 @@ import Foundation
 
 extension GM {
     
-    static let LifeCycleLogPrefix = "【 LIFECYCLE 】:"
-    static let NetworkLogPrefix = "【 NETWORK 】:"
-    static let StateLogPrefix = "【 STATE 】:"
-    static let ErrorLogPrefix = "【 ERROR 】:"
+    public static let LifeCycleLogPrefix = "【 LIFECYCLE 】:"
+    public static let NetworkLogPrefix = "【 NETWORK 】:"
+    public static let StateLogPrefix = "【 STATE 】:"
+    public static let ErrorLogPrefix = "【 ERROR 】:"
     
-    static func log(_ logPrefix:String = "【GM】:",_ items: Any...) {
+    public static func log(_ logPrefix:String = "【GM】:",_ items: Any...) {
         print(logPrefix, items)
     }
-    static func logErr(_ items: Any...) {
+    public static func logErr(_ items: Any...) {
         print(ErrorLogPrefix, items)
     }
 }
