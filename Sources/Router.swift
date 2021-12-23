@@ -16,7 +16,7 @@ public typealias AnyCallBack = (Any) -> Void
 public typealias VoidCallBack  = () -> Void
 
 /// 布尔参数无返回值
-typealias BoolCallBack = (Bool) -> Void
+public typealias BoolCallBack = (Bool) -> Void
 
 
 public enum RouteChangeDirection {
