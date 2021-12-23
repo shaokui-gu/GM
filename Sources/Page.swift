@@ -32,7 +32,7 @@ protocol GMViewEventProtocol {
 }
 
 open class GMPage : UIViewController, GMPageLifeCycle {
-
+    
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.onPageInit()
@@ -195,7 +195,7 @@ open class GMListPage : UITableViewController, GMPageLifeCycle {
     
     final public override func viewDidLoad() {
         super.viewDidLoad()
-        self.onPageInit()
+        self.onPageLoaded()
     }
     
     final public override func viewWillAppear(_ animated: Bool) {
@@ -282,7 +282,6 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     public override init(rootView: Content) {
         super.init(rootView: rootView)
         rootView.observedController?.uiViewController = self
-        rootView.observedController?.onPageInit()
     }
     
     required public init?(coder: NSCoder) {
@@ -291,6 +290,7 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     
     final public override func viewDidLoad() {
         super.viewDidLoad()
+        rootView.observedController?.onPageInit()
         rootView.observedController?.uiView = self.view
         rootView.observedController?.onPageLoaded()
     }
