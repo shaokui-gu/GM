@@ -286,7 +286,7 @@ open class GMPopoverView : UIViewController, GMPopOverUsable {
         return self.dismissHandler
     }
     
-    init(content:UIViewController, contentSize:CGSize = CGSize(width:200, height:174), arrowDirection:UIPopoverArrowDirection = .none, layoutMargins:UIEdgeInsets = .zero, onDissmiss:VoidCallBack? = nil) {
+    public init(content:UIViewController, contentSize:CGSize = CGSize(width:200, height:174), arrowDirection:UIPopoverArrowDirection = .none, layoutMargins:UIEdgeInsets = .zero, onDissmiss:VoidCallBack? = nil) {
         self.content = content
         self.contentSize = contentSize
         self.arrowDirection = arrowDirection
@@ -317,7 +317,7 @@ open class GMPopoverSwiftUIView<Content>: UIHostingController<Content>, GMPopOve
         return self.dismissHandler
     }
     
-    init(rootView: Content, contentSize:CGSize = CGSize(width:200, height:174), arrowDirection:UIPopoverArrowDirection = .none, layoutMargins:UIEdgeInsets = .zero, onDissmiss:VoidCallBack? = nil) {
+    public init(rootView: Content, contentSize:CGSize = CGSize(width:200, height:174), arrowDirection:UIPopoverArrowDirection = .none, layoutMargins:UIEdgeInsets = .zero, onDissmiss:VoidCallBack? = nil) {
         super.init(rootView: rootView)
         self.contentSize = contentSize
         self.arrowDirection = arrowDirection

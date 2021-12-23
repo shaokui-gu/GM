@@ -118,13 +118,13 @@ open class Router {
         public let identifire = UUID().uuidString
         
         /// 路由名称
-        private(set) var name:String
+        public private(set) var name:String
         
         /// id
-        private(set) var id:AnyHashable?
+        public private(set) var id:AnyHashable?
         
         /// viewController
-        private(set) weak var controller:UIViewController?
+        public private(set) weak var controller:UIViewController?
                 
         public init(_ name:String, id:AnyHashable? = nil, controller:UIViewController) {
             self.name = name
@@ -456,6 +456,10 @@ extension GM {
         return Router.shared.routes
     }
     
+    public var pages:[AnyHashable : Router.RoutePage] {
+        return Router.shared.pages
+    }
+
     /// 注册
     public static func registerPages(_ pages:[Router.RoutePage]) {
         Router.shared.registerPages(pages)

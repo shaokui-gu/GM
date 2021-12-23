@@ -33,7 +33,7 @@ protocol GMViewEventProtocol {
 
 open class GMPage : UIViewController, GMPageLifeCycle {
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.onPageInit()
     }
