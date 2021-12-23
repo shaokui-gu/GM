@@ -61,7 +61,7 @@ open class Router {
     public struct RouteError : Error {
         let code:Int
         let msg:String
-        init(code:Int, msg:String) {
+        public init(code:Int, msg:String) {
             self.code = code
             self.msg = msg
         }
@@ -104,7 +104,7 @@ open class Router {
         /// 界面跳转时是否带动画
         public var animated:Bool
         
-        init(name:String, page:@escaping ([String : Any ]?) -> UIViewController, transition:UIModalTransitionStyle? = nil, presentation:UIModalPresentationStyle? = nil, animated:Bool = true) {
+        public init(name:String, page:@escaping ([String : Any ]?) -> UIViewController, transition:UIModalTransitionStyle? = nil, presentation:UIModalPresentationStyle? = nil, animated:Bool = true) {
             self.name = name
             self.page = page
             self.transition = transition
@@ -126,7 +126,7 @@ open class Router {
         /// viewController
         private(set) weak var controller:UIViewController?
                 
-        init(_ name:String, id:AnyHashable? = nil, controller:UIViewController) {
+        public init(_ name:String, id:AnyHashable? = nil, controller:UIViewController) {
             self.name = name
             self.id = id
             self.controller = controller
