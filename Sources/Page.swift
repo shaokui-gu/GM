@@ -290,8 +290,8 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     
     final public override func viewDidLoad() {
         super.viewDidLoad()
-        rootView.observedController?.onPageInit()
         rootView.observedController?.uiView = self.view
+        rootView.observedController?.onPageInit()
         rootView.observedController?.onPageLoaded()
     }
     
