@@ -307,7 +307,16 @@ open class GMPopoverView : UIViewController, GMPopOverUsable {
     }
 }
 
-fileprivate class GMPopoverSwiftUIView<Content>: UIHostingController<Content> where Content : View {}
+
+open class GMPopoverSwiftUIView<Content>: UIHostingController<Content> where Content : View {
+    public override init(rootView: Content) {
+        super.init(rootView: rootView)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
 open class GMPopover {
     
