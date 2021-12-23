@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-public protocol GMPageLifeCycle {
+protocol GMPageLifeCycle {
     func onPageAppear() -> Void
     func onPageDisappear()  -> Void
     func onPageInit() -> Void
@@ -18,7 +18,7 @@ public protocol GMPageLifeCycle {
     func onPageBoundsUpdated(_ bounds:CGRect) -> Void
 }
 
-public protocol GMViewEventProtocol {
+protocol GMViewEventProtocol {
     
     /// 开始
     func touchesBegin() -> Void
@@ -33,7 +33,7 @@ public protocol GMViewEventProtocol {
 
 open class GMPage : UIViewController, GMPageLifeCycle {
 
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.onPageInit()
     }
@@ -72,12 +72,13 @@ open class GMPage : UIViewController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    public func onPageAppear() -> Void {}
-    public func onPageDisappear()  -> Void {}
-    public func onPageLoaded() -> Void {}
-    public func onPageInit() -> Void {}
-    public func onPageDestroy() -> Void {}
-    public func onPageBoundsUpdated(_ bounds: CGRect) {}
+    func onPageAppear() -> Void {}
+    func onPageDisappear()  -> Void {}
+    func onPageLoaded() -> Void {}
+    func onPageInit() -> Void {}
+    func onPageDestroy() -> Void {}
+    func onPageBoundsUpdated(_ bounds: CGRect) {}
+
     
 }
  
@@ -122,12 +123,13 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    public func onPageAppear() -> Void {}
-    public func onPageDisappear()  -> Void {}
-    public func onPageLoaded() -> Void {}
-    public func onPageInit() -> Void {}
-    public func onPageDestroy() -> Void {}
-    public func onPageBoundsUpdated(_ bounds: CGRect) {}
+    func onPageAppear() -> Void {}
+    func onPageDisappear()  -> Void {}
+    func onPageLoaded() -> Void {}
+    func onPageInit() -> Void {}
+    func onPageDestroy() -> Void {}
+    func onPageBoundsUpdated(_ bounds: CGRect) {}
+
 }
 
 open class GMTabBarPage : UITabBarController, GMPageLifeCycle {
@@ -171,12 +173,13 @@ open class GMTabBarPage : UITabBarController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    public func onPageAppear() -> Void {}
-    public func onPageDisappear()  -> Void {}
-    public func onPageLoaded() -> Void {}
-    public func onPageInit() -> Void {}
-    public func onPageDestroy() -> Void {}
-    public func onPageBoundsUpdated(_ bounds: CGRect) {}
+    func onPageAppear() -> Void {}
+    func onPageDisappear()  -> Void {}
+    func onPageLoaded() -> Void {}
+    func onPageInit() -> Void {}
+    func onPageDestroy() -> Void {}
+    func onPageBoundsUpdated(_ bounds: CGRect) {}
+
 }
 
 open class GMListPage : UITableViewController, GMPageLifeCycle {
@@ -220,12 +223,12 @@ open class GMListPage : UITableViewController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    public func onPageAppear() -> Void {}
-    public func onPageDisappear()  -> Void {}
-    public func onPageLoaded() -> Void {}
-    public func onPageInit() -> Void {}
-    public func onPageDestroy() -> Void {}
-    public func onPageBoundsUpdated(_ bounds: CGRect) {}
+    func onPageAppear() -> Void {}
+    func onPageDisappear()  -> Void {}
+    func onPageLoaded() -> Void {}
+    func onPageInit() -> Void {}
+    func onPageDestroy() -> Void {}
+    func onPageBoundsUpdated(_ bounds: CGRect) {}
 }
 
 /// Swift UI
@@ -253,22 +256,24 @@ open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProto
     weak fileprivate(set) var uiView:UIView?
     /// 绑定页面的bounds
     fileprivate(set) var bounds:CGRect = .zero
-    public func onPageBoundsUpdated(_ bounds: CGRect) {
+    
+    func onPageBoundsUpdated(_ bounds: CGRect) {
         self.bounds = bounds
     }
-    public func onPageAppear() -> Void {}
-    public func onPageDisappear()  -> Void {}
-    public func onPageLoaded() -> Void {}
-    public func onPageInit() -> Void {}
-    public func onPageDestroy() -> Void {}
+    
+    func onPageAppear() -> Void {}
+    func onPageDisappear()  -> Void {}
+    func onPageLoaded() -> Void {}
+    func onPageInit() -> Void {}
+    func onPageDestroy() -> Void {}
     /// 开始
-    public func touchesBegin() {}
+    func touchesBegin() {}
     /// 移动
-    public func touchesMove() {}
+    func touchesMove() {}
     ///  结束
-    public func touchesEnd() {}
+    func touchesEnd() {}
     /// 取消
-    public func touchesCancel() {}
+    func touchesCancel() {}
 
 }
 
@@ -277,6 +282,7 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     override init(rootView: Content) {
         super.init(rootView: rootView)
         rootView.observedController?.uiViewController = self
+        rootView.observedController?.onPageInit()
     }
     
     required public init?(coder: NSCoder) {
@@ -286,7 +292,6 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     final public override func viewDidLoad() {
         super.viewDidLoad()
         rootView.observedController?.uiView = self.view
-        rootView.observedController?.onPageInit()
         rootView.observedController?.onPageLoaded()
     }
     
