@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import OpenUDID
 
 extension GM {
     /// app 版本号

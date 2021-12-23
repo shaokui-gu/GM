@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "KeychainItemWrapper",
-        "repositoryURL": "https://github.com/shaokui-gu/KeychainItemWrapper.git",
-        "state": {
-          "branch": null,
-          "revision": "eea3843a0a3bdc99ecc321385c76d04b3ce36d0d",
-          "version": "0.0.2"
-        }
-      },
-      {
         "package": "MBProgressHUD",
         "repositoryURL": "https://github.com/jdg/MBProgressHUD.git",
         "state": {

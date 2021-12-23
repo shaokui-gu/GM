@@ -12,7 +12,6 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/shaokui-gu/OpenUDID.git", from: "1.0.1"),
-        .package(url: "https://github.com/shaokui-gu/KeychainItemWrapper.git", from: "0.0.2"),
         .package(url: "https://github.com/jdg/MBProgressHUD.git", from: "1.2.0"),
     ],
     targets: [
@@ -20,7 +19,6 @@ let package = Package(
             name: "GMX",
             dependencies: [
                 "OpenUDID",
-                "KeychainItemWrapper",
                 "MBProgressHUD"
             ],
             path: "Sources"
