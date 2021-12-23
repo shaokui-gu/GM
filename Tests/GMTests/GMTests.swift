@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import GMX
+@testable import GM
 
 final class GMTests: XCTestCase {
     func testExample() throws {
