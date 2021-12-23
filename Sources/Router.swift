@@ -456,7 +456,7 @@ extension GM {
         return Router.shared.routes
     }
     
-    public var pages:[AnyHashable : Router.RoutePage] {
+    public static var pages:[AnyHashable : Router.RoutePage] {
         return Router.shared.pages
     }
 
