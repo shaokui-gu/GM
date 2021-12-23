@@ -295,6 +295,7 @@ open class GMPopoverView : UIViewController, GMPopOverUsable {
         super.init(nibName: nil, bundle: nil)
         view.addSubview(content.view)
         addChild(content)
+        view.backgroundColor = .clear
         content.view.translatesAutoresizingMaskIntoConstraints = false
         content.view.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
         content.view.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
