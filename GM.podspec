@@ -6,6 +6,9 @@ Pod::Spec.new do |s|
   s.license      = 'MIT'
   s.author       = { 'gushaokui' => 'gushaoakui@126.com' }
   s.source       = { :git => "https://github.com/shaokui-gu/GM.git" }
-  s.source_files = '*.{h,m}'
+  s.source_files = 'Sources/*.{h,m}'
+  s.resource_bundles = {
+    'GM' => ['Assets/*']
+  }
   s.requires_arc = true
 end
