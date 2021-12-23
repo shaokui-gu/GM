@@ -252,10 +252,10 @@ public extension GMSwiftUIPageView {
 }
 
 open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProtocol {
-    weak fileprivate(set) var uiViewController:UIViewController?
-    weak fileprivate(set) var uiView:UIView?
+    public weak fileprivate(set) var uiViewController:UIViewController?
+    public weak fileprivate(set) var uiView:UIView?
     /// 绑定页面的bounds
-    fileprivate(set) var bounds:CGRect = .zero
+    public fileprivate(set) var bounds:CGRect = .zero
     
     func onPageBoundsUpdated(_ bounds: CGRect) {
         self.bounds = bounds
@@ -279,7 +279,7 @@ open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProto
 
 open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: GMSwiftUIPageView {
   
-    override init(rootView: Content) {
+    public override init(rootView: Content) {
         super.init(rootView: rootView)
         rootView.observedController?.uiViewController = self
         rootView.observedController?.onPageInit()
