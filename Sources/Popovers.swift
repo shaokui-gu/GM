@@ -286,7 +286,7 @@ open class GMPopoverView : UIViewController, GMPopOverUsable {
         return self.dismissHandler
     }
     
-    public init(content:UIViewController, contentSize:CGSize = CGSize(width:200, height:174), arrowDirection:UIPopoverArrowDirection = .none, layoutMargins:UIEdgeInsets = .zero, onDissmiss:VoidCallBack? = nil) {
+    public init(_ content:UIViewController, contentSize:CGSize = CGSize(width:200, height:174), arrowDirection:UIPopoverArrowDirection = .none, layoutMargins:UIEdgeInsets = .zero, onDissmiss:VoidCallBack? = nil) {
         self.content = content
         self.contentSize = contentSize
         self.arrowDirection = arrowDirection
@@ -307,28 +307,7 @@ open class GMPopoverView : UIViewController, GMPopOverUsable {
     }
 }
 
-open class GMPopoverSwiftUIView<Content>: UIHostingController<Content>, GMPopOverUsable where Content : View {
-    
-    public var contentSize: CGSize = CGSize(width:200, height:174)
-    public var arrowDirection: UIPopoverArrowDirection = .none
-    public var layoutMargins: UIEdgeInsets = .zero
-    public var dismissHandler:VoidCallBack?
-    public var onDismiss:VoidCallBack? {
-        return self.dismissHandler
-    }
-    
-    public init(rootView: Content, contentSize:CGSize = CGSize(width:200, height:174), arrowDirection:UIPopoverArrowDirection = .none, layoutMargins:UIEdgeInsets = .zero, onDissmiss:VoidCallBack? = nil) {
-        super.init(rootView: rootView)
-        self.contentSize = contentSize
-        self.arrowDirection = arrowDirection
-        self.layoutMargins = layoutMargins
-        self.dismissHandler = onDissmiss
-    }
-        
-    @objc required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
+fileprivate class GMPopoverSwiftUIView<Content>: UIHostingController<Content> where Content : View {}
 
 open class GMPopover {
     
@@ -340,7 +319,7 @@ open class GMPopover {
     }
     
     public func showPopover<contentView:View>(_ view:contentView, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
-        let popover = GMPopoverSwiftUIView(rootView: view, contentSize: contentSize, layoutMargins: layoutMargins, onDissmiss: onDissmiss)
+        let popover = GMPopoverView(GMPopoverSwiftUIView(rootView: view), contentSize: contentSize, layoutMargins: layoutMargins, onDissmiss: onDissmiss)
         popover.view.backgroundColor = backgroundColor
         let viewController = GM.topPage()?.controller ?? GM.rootPage()!.controller!
         popover.showPopover(sourceView: viewController.view, sourceRect:sourceRect)
@@ -348,7 +327,7 @@ open class GMPopover {
     }
     
     public func showPopover(_ view:UIViewController, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
-        let popover = GMPopoverView(content: view, contentSize: contentSize, layoutMargins: layoutMargins, onDissmiss: onDissmiss)
+        let popover = GMPopoverView(view, contentSize: contentSize, layoutMargins: layoutMargins, onDissmiss: onDissmiss)
         popover.view.backgroundColor = backgroundColor
         let viewController = GM.topPage()?.controller ?? GM.rootPage()!.controller!
         popover.showPopover(sourceView: viewController.view, sourceRect:sourceRect)
