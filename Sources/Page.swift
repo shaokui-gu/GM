@@ -72,12 +72,12 @@ open class GMPage : UIViewController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    func onPageAppear() -> Void {}
-    func onPageDisappear()  -> Void {}
-    func onPageLoaded() -> Void {}
-    func onPageInit() -> Void {}
-    func onPageDestroy() -> Void {}
-    func onPageBoundsUpdated(_ bounds: CGRect) {}
+    open func onPageAppear() -> Void {}
+    open func onPageDisappear()  -> Void {}
+    open func onPageLoaded() -> Void {}
+    open func onPageInit() -> Void {}
+    open func onPageDestroy() -> Void {}
+    open func onPageBoundsUpdated(_ bounds: CGRect) {}
 
     
 }
@@ -123,12 +123,12 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    func onPageAppear() -> Void {}
-    func onPageDisappear()  -> Void {}
-    func onPageLoaded() -> Void {}
-    func onPageInit() -> Void {}
-    func onPageDestroy() -> Void {}
-    func onPageBoundsUpdated(_ bounds: CGRect) {}
+    open func onPageAppear() -> Void {}
+    open func onPageDisappear()  -> Void {}
+    open func onPageLoaded() -> Void {}
+    open func onPageInit() -> Void {}
+    open func onPageDestroy() -> Void {}
+    open func onPageBoundsUpdated(_ bounds: CGRect) {}
 
 }
 
@@ -223,12 +223,12 @@ open class GMListPage : UITableViewController, GMPageLifeCycle {
         self.onPageDestroy()
     }
     
-    func onPageAppear() -> Void {}
-    func onPageDisappear()  -> Void {}
-    func onPageLoaded() -> Void {}
-    func onPageInit() -> Void {}
-    func onPageDestroy() -> Void {}
-    func onPageBoundsUpdated(_ bounds: CGRect) {}
+    open func onPageAppear() -> Void {}
+    open func onPageDisappear()  -> Void {}
+    open func onPageLoaded() -> Void {}
+    open func onPageInit() -> Void {}
+    open func onPageDestroy() -> Void {}
+    open func onPageBoundsUpdated(_ bounds: CGRect) {}
 }
 
 /// Swift UI
@@ -261,19 +261,19 @@ open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProto
         self.bounds = bounds
     }
     
-    func onPageAppear() -> Void {}
-    func onPageDisappear()  -> Void {}
-    func onPageLoaded() -> Void {}
-    func onPageInit() -> Void {}
-    func onPageDestroy() -> Void {}
+    open func onPageAppear() -> Void {}
+    open func onPageDisappear()  -> Void {}
+    open func onPageLoaded() -> Void {}
+    open func onPageInit() -> Void {}
+    open func onPageDestroy() -> Void {}
     /// 开始
-    func touchesBegin() {}
+    open func touchesBegin() {}
     /// 移动
-    func touchesMove() {}
+    open func touchesMove() {}
     ///  结束
-    func touchesEnd() {}
+    open func touchesEnd() {}
     /// 取消
-    func touchesCancel() {}
+    open func touchesCancel() {}
 
 }
 
