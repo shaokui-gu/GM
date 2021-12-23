@@ -339,7 +339,7 @@ open class GMPopover {
         return currentPopover != nil
     }
     
-    func showPopover<contentView:View>(_ view:contentView, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
+    public func showPopover<contentView:View>(_ view:contentView, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
         let popover = GMPopoverSwiftUIView(rootView: view, contentSize: contentSize, layoutMargins: layoutMargins, onDissmiss: onDissmiss)
         popover.view.backgroundColor = backgroundColor
         let viewController = GM.topPage()?.controller ?? GM.rootPage()!.controller!
@@ -347,7 +347,7 @@ open class GMPopover {
         self.currentPopover = popover
     }
     
-    func showPopover(_ view:UIViewController, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
+    public func showPopover(_ view:UIViewController, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
         let popover = GMPopoverView(content: view, contentSize: contentSize, layoutMargins: layoutMargins, onDissmiss: onDissmiss)
         popover.view.backgroundColor = backgroundColor
         let viewController = GM.topPage()?.controller ?? GM.rootPage()!.controller!
@@ -355,7 +355,7 @@ open class GMPopover {
         self.currentPopover = popover
     }
     
-    func showPopover(_ name:String, params:[String : Any]? = nil, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) throws {
+    public func showPopover(_ name:String, params:[String : Any]? = nil, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) throws {
         guard let routePage = Router.shared.pages[name] else {
             throw Router.RouteError.init(code: Router.RouteErrorCode.notFound.rawValue, msg: Router.RouteErrorDescription.notFound.rawValue)
         }
@@ -363,22 +363,22 @@ open class GMPopover {
         self.showPopover(viewController, contentSize: contentSize, layoutMargins: layoutMargins, backgroundColor: backgroundColor, sourceRect: sourceRect, onDissmiss: onDissmiss)
     }
     
-    func dismiss(animated:Bool = true, completion:VoidCallBack? = nil) {
+    public func dismiss(animated:Bool = true, completion:VoidCallBack? = nil) {
         self.currentPopover?.dismiss(animated: animated, completion: completion)
     }
 }
 
 extension GM {
     
-    static func showPopover<contentView:GMSwiftUIPageView>(_ view:contentView, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
+    public static func showPopover<contentView:GMSwiftUIPageView>(_ view:contentView, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
         GMPopover.shared.showPopover(view, contentSize: contentSize, layoutMargins:layoutMargins, backgroundColor: backgroundColor, sourceRect: sourceRect, onDissmiss: onDissmiss)
     }
     
-    static func showPopover(_ name:String, params:[String : Any]? = nil, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
+    public static func showPopover(_ name:String, params:[String : Any]? = nil, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
         try? GMPopover.shared.showPopover(name, params: params, contentSize: contentSize, layoutMargins:layoutMargins, backgroundColor: backgroundColor, sourceRect: sourceRect, onDissmiss: onDissmiss)
     }
     
-    static func dismissPopover(animated:Bool = true, completion:VoidCallBack? = nil) {
+    public static func dismissPopover(animated:Bool = true, completion:VoidCallBack? = nil) {
         GMPopover.shared.dismiss(animated: animated, completion: completion)
     }
 }
