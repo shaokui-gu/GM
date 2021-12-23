@@ -276,7 +276,7 @@ private final class GMPopOverDelegation: NSObject, UIPopoverPresentationControll
     
 }
 
-public class GMPopoverView : UIViewController, GMPopOverUsable {
+open class GMPopoverView : UIViewController, GMPopOverUsable {
     public var contentSize: CGSize = CGSize(width:200, height:174)
     public var arrowDirection: UIPopoverArrowDirection = .none
     public var layoutMargins: UIEdgeInsets = .zero
@@ -302,12 +302,12 @@ public class GMPopoverView : UIViewController, GMPopOverUsable {
         content.view.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
     }
     
-    @objc required dynamic init?(coder aDecoder: NSCoder) {
+    @objc required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-public class GMPopoverSwiftUIView<Content>: UIHostingController<Content>, GMPopOverUsable where Content : View {
+open class GMPopoverSwiftUIView<Content>: UIHostingController<Content>, GMPopOverUsable where Content : View {
     
     public var contentSize: CGSize = CGSize(width:200, height:174)
     public var arrowDirection: UIPopoverArrowDirection = .none
@@ -325,12 +325,12 @@ public class GMPopoverSwiftUIView<Content>: UIHostingController<Content>, GMPopO
         self.dismissHandler = onDissmiss
     }
         
-    @objc required dynamic init?(coder aDecoder: NSCoder) {
+    @objc required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-public class GMPopover {
+open class GMPopover {
     
     static let shared = GMPopover()
     private init(){}

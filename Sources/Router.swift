@@ -39,7 +39,7 @@ public protocol RouterDelegate {
     func routerLoadFailure(_ error:Error, params:[String: Any]?, direction:RouteChangeDirection, transitionType:RouteChangeTransitionType) -> Void
 }
 
-public class Router {
+open class Router {
     
     /// 错误码
     public enum RouteErrorCode : Int {

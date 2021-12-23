@@ -31,14 +31,14 @@ public protocol GMViewEventProtocol {
     
 }
 
-public class GMPage : UIViewController, GMPageLifeCycle {
+open class GMPage : UIViewController, GMPageLifeCycle {
 
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.onPageInit()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -81,14 +81,14 @@ public class GMPage : UIViewController, GMPageLifeCycle {
     
 }
  
-public class GMNavigationPage : UINavigationController, GMPageLifeCycle {
+open class GMNavigationPage : UINavigationController, GMPageLifeCycle {
     
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         self.onPageInit()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -130,14 +130,14 @@ public class GMNavigationPage : UINavigationController, GMPageLifeCycle {
     public func onPageBoundsUpdated(_ bounds: CGRect) {}
 }
 
-public class GMTabBarPage : UITabBarController, GMPageLifeCycle {
+open class GMTabBarPage : UITabBarController, GMPageLifeCycle {
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.onPageInit()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -179,14 +179,14 @@ public class GMTabBarPage : UITabBarController, GMPageLifeCycle {
     public func onPageBoundsUpdated(_ bounds: CGRect) {}
 }
 
-public class GMListPage : UITableViewController, GMPageLifeCycle {
+open class GMListPage : UITableViewController, GMPageLifeCycle {
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.onPageInit()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -248,7 +248,7 @@ public extension GMSwiftUIPageView {
     }
 }
 
-public class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProtocol {
+open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProtocol {
     weak fileprivate(set) var uiViewController:UIViewController?
     weak fileprivate(set) var uiView:UIView?
     /// 绑定页面的bounds
@@ -272,14 +272,14 @@ public class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventPro
 
 }
 
-public class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: GMSwiftUIPageView {
+open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: GMSwiftUIPageView {
   
     override init(rootView: Content) {
         super.init(rootView: rootView)
         rootView.observedController?.uiViewController = self
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
