@@ -328,11 +328,8 @@ open class GMPopover {
     }
     
     public func showPopover<contentView:View>(_ view:contentView, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
-        let popover = GMPopoverView(GMPopoverSwiftUIView(rootView: view), contentSize: contentSize, layoutMargins: layoutMargins, onDissmiss: onDissmiss)
-        popover.view.backgroundColor = backgroundColor
-        let viewController = GM.topPage()?.controller ?? GM.rootPage()!.controller!
-        popover.showPopover(sourceView: viewController.view, sourceRect:sourceRect)
-        self.currentPopover = popover
+        let content = GMPopoverSwiftUIView(rootView: view)
+        self.showPopover(content, contentSize: contentSize, layoutMargins: layoutMargins, backgroundColor: backgroundColor, sourceRect: sourceRect, onDissmiss: onDissmiss)
     }
     
     public func showPopover(_ view:UIViewController, contentSize:CGSize = CGSize(width:200, height:174), layoutMargins:UIEdgeInsets = .zero, backgroundColor:UIColor? = .white, sourceRect:CGRect = .zero, onDissmiss:VoidCallBack? = nil) {
