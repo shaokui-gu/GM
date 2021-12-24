@@ -487,6 +487,10 @@ extension GM {
         Router.shared.root = page
     }
     
+    public static func removePage(_ identifire:String) {
+        Router.shared.removePage(identifire)
+    }
+    
     public static func toNamed(_ name:String, id:AnyHashable? = nil, params:[String : Any]? = nil, useRootNavigation:Bool = false, animated:Bool? = nil, completion:VoidCallBack? = nil) {
         do {
             try Router.shared.toNamed(name, id: id, params: params, useRootNavigation: useRootNavigation, animated: animated, completion: completion)
