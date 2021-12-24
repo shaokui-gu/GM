@@ -12,14 +12,12 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/shaokui-gu/OpenUDID.git", from: "1.0.1"),
-        .package(url: "https://github.com/jdg/MBProgressHUD.git", from: "1.2.0"),
     ],
     targets: [
         .target(
             name: "GM",
             dependencies: [
                 "OpenUDID",
-                "MBProgressHUD"
             ],
             path: "Sources"
         ),
