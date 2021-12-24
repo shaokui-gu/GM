@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-protocol GMPageLifeCycle {
+public protocol GMPageLifeCycle {
     func onPageAppear() -> Void
     func onPageDisappear()  -> Void
     func onPageInit() -> Void
@@ -18,7 +18,7 @@ protocol GMPageLifeCycle {
     func onPageBoundsUpdated(_ bounds:CGRect) -> Void
 }
 
-protocol GMViewEventProtocol {
+public protocol GMViewEventProtocol {
     
     /// 开始
     func touchesBegin() -> Void
@@ -257,7 +257,7 @@ open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProto
     /// 绑定页面的bounds
     public fileprivate(set) var bounds:CGRect = .zero
     
-    func onPageBoundsUpdated(_ bounds: CGRect) {
+    open func onPageBoundsUpdated(_ bounds: CGRect) {
         self.bounds = bounds
     }
     

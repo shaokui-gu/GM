@@ -410,7 +410,7 @@ open class Router {
 }
 
 
-extension UIViewController {
+public extension UIViewController {
     
     struct AssociatedKeys {
         static var paramsKey = "params_key"
