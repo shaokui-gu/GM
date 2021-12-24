@@ -20,7 +20,16 @@ extension GM {
         private init(){}
         
         /// 微微震动
-        let softImpack = UIImpactFeedbackGenerator.init(style: .soft)
+        lazy var softImpack:UIImpactFeedbackGenerator = {
+            var generator:UIImpactFeedbackGenerator?
+            if #available(iOS 13.0, *) {
+                let generator = UIImpactFeedbackGenerator.init(style: .soft)
+            } else {
+                // Fallback on earlier versions
+                let generator = UIImpactFeedbackGenerator.init(style: .light)
+            }
+            return generator!
+        }()
         
         /// 默认震动
         let defaultImpack = UIImpactFeedbackGenerator.init()

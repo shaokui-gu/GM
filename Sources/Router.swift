@@ -301,7 +301,11 @@ open class Router {
         
         let topController = self.current?.controller ?? self.navigator.root
         let viewController = routePage.page(params)
-        viewController.isModalInPresentation = !enablePullBack
+        if #available(iOS 13.0, *) {
+            viewController.isModalInPresentation = !enablePullBack
+        } else {
+            // Fallback on earlier versions
+        }
         viewController.isModalViewController = true
         viewController.modalTransitionStyle = transition ?? routePage.transition ?? .coverVertical
         viewController.modalPresentationStyle = presentation ?? routePage.presentation ?? .pageSheet
@@ -367,7 +371,7 @@ open class Router {
         let from = self.current?.name
         let to = page.name
         
-        let finalIsModalPage = subRoutes.last?.controller?.isModalInPresentation ?? false
+        let finalIsModalPage = subRoutes.last?.controller?.isModalViewController ?? false
         let transitionType:RouteChangeTransitionType = finalIsModalPage ? .dismiss : .pop
         guard (delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: transitionType) ?? true) else {
             return

@@ -232,10 +232,12 @@ open class GMListPage : UITableViewController, GMPageLifeCycle {
 }
 
 /// Swift UI
+@available(iOS 13.0, *)
 public protocol GMSwiftUIPageView : View {
     var observedController:GMSwiftUIPageController? { get }
 }
 
+@available(iOS 13.0, *)
 public extension GMSwiftUIPageView {
     
     var observedController:GMSwiftUIPageController? {
@@ -277,6 +279,7 @@ open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProto
 
 }
 
+@available(iOS 13.0, *)
 open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: GMSwiftUIPageView {
   
     public override init(rootView: Content) {
