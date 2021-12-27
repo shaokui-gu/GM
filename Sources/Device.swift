@@ -23,10 +23,10 @@ extension GM {
         lazy var softImpack:UIImpactFeedbackGenerator = {
             var generator:UIImpactFeedbackGenerator?
             if #available(iOS 13.0, *) {
-                let generator = UIImpactFeedbackGenerator.init(style: .soft)
+                generator = UIImpactFeedbackGenerator.init(style: .soft)
             } else {
                 // Fallback on earlier versions
-                let generator = UIImpactFeedbackGenerator.init(style: .light)
+                generator = UIImpactFeedbackGenerator.init(style: .light)
             }
             return generator!
         }()
