@@ -158,4 +158,27 @@ protocol GMPageLifeCycle {
     func onPageBoundsUpdated(_ bounds:CGRect) -> Void
 }
 ```
+## 基础组件
+
+## <a id="log">Log</a>
+
+```
+GM.log('hellow world')
+```
+## <a id="info">Info</a>
+
+```
+let version = GM.appVersion
+let buildVersion = GM.buildVersion
+```
+
+## <a id="info">Info</a>
+
+```
+let windowSize = GM.windowSize
+let safeArea = GM.safeArea
+let deviceID = GM.deviceID
+let platform = GM.platform
+let osVersion = GM.osVersion
+```
 
