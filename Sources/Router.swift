@@ -33,10 +33,10 @@ public enum RouteChangeTransitionType {
 
 /// 路由代理
 public protocol RouterDelegate {
-    func routerShouldChange(_ from:String?, to:String?, params:[String: Any]?, direction:RouteChangeDirection, transitionType:RouteChangeTransitionType) -> Bool
-    func routerWillChange(_ from:String?, to:String?, params:[String: Any]?, direction:RouteChangeDirection, transitionType:RouteChangeTransitionType) -> Void
-    func routerDidChange(_ from:String?, to:String?, params:[String: Any]?, direction:RouteChangeDirection, transitionType:RouteChangeTransitionType) -> Void
-    func routerLoadFailure(_ error:Error, params:[String: Any]?, direction:RouteChangeDirection, transitionType:RouteChangeTransitionType) -> Void
+    func routerShouldChange(_ from:String?, to:String?, params:[String: Any]?, direction:RouteChangeDirection, transitionType:RouteChangeTransitionType) throws -> Bool
+    func routerWillChange(_ from:String?, to:String?, params:[String: Any]?, direction:RouteChangeDirection, transitionType:RouteChangeTransitionType) throws -> Void
+    func routerDidChange(_ from:String?, to:String?, params:[String: Any]?, direction:RouteChangeDirection, transitionType:RouteChangeTransitionType) throws -> Void
+    func routerLoadFailure(_ error:Error, params:[String: Any]?, direction:RouteChangeDirection, transitionType:RouteChangeTransitionType) throws -> Void
 }
 
 open class Router {
@@ -220,10 +220,10 @@ open class Router {
         }
         
         let from = self.current?.name
-        guard (delegate?.routerShouldChange(from, to: name, params: params, direction: .forward, transitionType: .push) ?? true) else {
+        guard (try delegate?.routerShouldChange(from, to: name, params: params, direction: .forward, transitionType: .push) ?? true) else {
             return
         }
-        delegate?.routerWillChange(from, to: name, params: params, direction: .forward, transitionType: .push)
+        try delegate?.routerWillChange(from, to: name, params: params, direction: .forward, transitionType: .push)
         
         let viewController = routePage.page(params)
         let page = Router.Page(name, id: id, controller: viewController)
@@ -231,7 +231,7 @@ open class Router {
         GM.log(GM.RouteLogPrefix, "\(viewController.description)进入路由")
         self.routes.append(page)
         completion?()
-        delegate?.routerDidChange(from, to: name, params: params, direction: .forward, transitionType: .push)
+        try delegate?.routerDidChange(from, to: name, params: params, direction: .forward, transitionType: .push)
     }
     
     /// push and remove self from navigation after pushed
@@ -254,10 +254,10 @@ open class Router {
         }
         
         let from = self.current?.name
-        guard (delegate?.routerShouldChange(from, to: name, params: params, direction: .forward, transitionType: .push) ?? true) else {
+        guard (try delegate?.routerShouldChange(from, to: name, params: params, direction: .forward, transitionType: .push) ?? true) else {
             return
         }
-        delegate?.routerWillChange(from, to: name, params: params, direction: .forward, transitionType: .push)
+        try delegate?.routerWillChange(from, to: name, params: params, direction: .forward, transitionType: .push)
         
         let currentPage = self.current
         let currentPageIdx = self.routes.count - 1
@@ -279,7 +279,7 @@ open class Router {
             }
         }
         completion?()
-        delegate?.routerDidChange(from, to: name, params: params, direction: .forward, transitionType: .push)
+        try delegate?.routerDidChange(from, to: name, params: params, direction: .forward, transitionType: .push)
     }
     
     /// present new
@@ -294,10 +294,10 @@ open class Router {
         }
         
         let from = self.current?.name
-        guard (delegate?.routerShouldChange(from, to: name, params: params, direction: .forward, transitionType: .present) ?? true) else {
+        guard (try delegate?.routerShouldChange(from, to: name, params: params, direction: .forward, transitionType: .present) ?? true) else {
             return
         }
-        delegate?.routerWillChange(from, to: name, params: params, direction: .forward, transitionType: .present)
+        try delegate?.routerWillChange(from, to: name, params: params, direction: .forward, transitionType: .present)
         
         let topController = self.current?.controller ?? self.navigator.root
         let viewController = routePage.page(params)
@@ -313,7 +313,7 @@ open class Router {
         topController?.present(viewController, animated: animated ?? routePage.animated, completion: completion)
         GM.log(GM.RouteLogPrefix, "\(viewController.description)进入路由")
         self.routes.append(page)
-        delegate?.routerDidChange(from, to: name, params: params, direction: .forward, transitionType: .present)
+        try delegate?.routerDidChange(from, to: name, params: params, direction: .forward, transitionType: .present)
     }
     
     /// back
@@ -330,24 +330,24 @@ open class Router {
         if controller.isModalViewController {
             self.routes.removeLast()
             to = self.current?.name
-            guard (delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: .dismiss) ?? true) else {
+            guard (try delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: .dismiss) ?? true) else {
                 return
             }
-            delegate?.routerWillChange(from, to: to, params: nil, direction: .backward, transitionType: .dismiss)
+            try delegate?.routerWillChange(from, to: to, params: nil, direction: .backward, transitionType: .dismiss)
             controller.dismiss(animated: animated, completion: completion)
-            delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: .dismiss)
+            try delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: .dismiss)
         } else {
             guard let navigation = self.navigator.topNavigation else {
                 throw RouteError.init(code: RouteErrorCode.notSupport.rawValue, msg: RouteErrorDescription.notSupport.rawValue)
             }
             self.routes.removeLast()
             to = self.current?.name
-            guard (delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: .pop) ?? true) else {
+            guard (try delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: .pop) ?? true) else {
                 return
             }
             navigation.popViewController(animated: animated)
             completion?()
-            delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: .pop)
+            try delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: .pop)
         }
     }
     
@@ -373,15 +373,15 @@ open class Router {
         
         let finalIsModalPage = subRoutes.last?.controller?.isModalViewController ?? false
         let transitionType:RouteChangeTransitionType = finalIsModalPage ? .dismiss : .pop
-        guard (delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: transitionType) ?? true) else {
+        guard (try delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: transitionType) ?? true) else {
             return
         }
-        delegate?.routerWillChange(from, to: to, params: nil, direction: .backward, transitionType: transitionType)
+        try delegate?.routerWillChange(from, to: to, params: nil, direction: .backward, transitionType: transitionType)
         guard modalPages.count > 0 else {
             let  controllers = self.navigator.topNavigation?.popToViewController(controller, animated: animated)
             self.routes.removeLast(controllers?.count ?? 0)
             completion?()
-            delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: .pop)
+            try delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: .pop)
             return
         }
         
@@ -409,7 +409,7 @@ open class Router {
             self.routes.removeLast(controllers?.count ?? 0)
             completion?()
         }
-        delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: transitionType)
+        try delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: transitionType)
     }
 }
 
