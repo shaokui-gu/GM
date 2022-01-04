@@ -47,6 +47,8 @@ open class Router {
         case notFound = 404
         case notSupport = 405
         case internalError = 500
+        case interruptWithDialog = 600
+        case interruptWithPopover = 601
     }
 
     /// 错误描述
@@ -55,6 +57,8 @@ open class Router {
         case notFound = "路由不存在"
         case notSupport = "不支持此方式切换路由"
         case internalError = "内部错误"
+        case interruptWithDialog = "被Dialog打断"
+        case interruptWithPopover = "被Popover打断"
     }
     
     /// 错误
