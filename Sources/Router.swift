@@ -326,13 +326,13 @@ open class Router {
             throw RouteError.init(code: RouteErrorCode.internalError.rawValue, msg: RouteErrorDescription.internalError.rawValue)
         }
         let from = self.current?.name
-        var to:String?
+        let count = self.routes.count
+        let to:String? = count > 1 ? self.routes[count - 1].name : self.current?.name
         if controller.isModalViewController {
-            self.routes.removeLast()
-            to = self.current?.name
             guard (try delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: .dismiss) ?? true) else {
                 return
             }
+            self.routes.removeLast()
             try delegate?.routerWillChange(from, to: to, params: nil, direction: .backward, transitionType: .dismiss)
             controller.dismiss(animated: animated, completion: completion)
             try delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: .dismiss)
@@ -340,11 +340,10 @@ open class Router {
             guard let navigation = self.navigator.topNavigation else {
                 throw RouteError.init(code: RouteErrorCode.notSupport.rawValue, msg: RouteErrorDescription.notSupport.rawValue)
             }
-            self.routes.removeLast()
-            to = self.current?.name
             guard (try delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: .pop) ?? true) else {
                 return
             }
+            self.routes.removeLast()
             navigation.popViewController(animated: animated)
             completion?()
             try delegate?.routerDidChange(from, to: to, params: nil, direction: .backward, transitionType: .pop)
@@ -376,6 +375,7 @@ open class Router {
         guard (try delegate?.routerShouldChange(from, to: to, params: nil, direction: .backward, transitionType: transitionType) ?? true) else {
             return
         }
+        
         try delegate?.routerWillChange(from, to: to, params: nil, direction: .backward, transitionType: transitionType)
         guard modalPages.count > 0 else {
             let  controllers = self.navigator.topNavigation?.popToViewController(controller, animated: animated)
