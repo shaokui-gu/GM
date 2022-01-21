@@ -32,6 +32,8 @@
   * [Dialog](https://github.com/shaokui-gu/GM-Dialog)
   * [Toast](https://github.com/shaokui-gu/GM-Toast)
   * [Popover](https://github.com/shaokui-gu/GM-Popover)
+  * [Dragable](https://github.com/shaokui-gu/GM-Dragable)
+
 
 [关于SwiftUI](#关于SwiftUI)
 
