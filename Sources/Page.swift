@@ -184,8 +184,8 @@ open class GMTabBarPage : UITabBarController, GMPageLifeCycle {
 
 open class GMListPage : UITableViewController, GMPageLifeCycle {
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    public override init(style: UITableView.Style) {
+        super.init(style: style)
         self.onPageInit()
     }
     
@@ -233,8 +233,8 @@ open class GMListPage : UITableViewController, GMPageLifeCycle {
 
 open class GMGridPage : UICollectionViewController, GMPageLifeCycle {
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    public override init(collectionViewLayout layout: UICollectionViewLayout) {
+        super.init(collectionViewLayout: layout)
         self.onPageInit()
     }
     
