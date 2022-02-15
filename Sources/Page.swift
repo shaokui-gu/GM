@@ -334,7 +334,9 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     public override init(rootView: Content) {
         super.init(rootView: rootView)
         rootView.observedController?.uiViewController = self
-        let _ = self.view
+        rootView.observedController?.uiView = self.view
+        rootView.observedController?.onPageInit()
+        rootView.observedController?.onPageLoaded()
     }
     
     required public init?(coder: NSCoder) {
@@ -343,9 +345,6 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     
     final public override func viewDidLoad() {
         super.viewDidLoad()
-        rootView.observedController?.uiView = self.view
-        rootView.observedController?.onPageInit()
-        rootView.observedController?.onPageLoaded()
     }
     
     final public override func viewWillAppear(_ animated: Bool) {
