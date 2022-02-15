@@ -334,6 +334,7 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     public override init(rootView: Content) {
         super.init(rootView: rootView)
         rootView.observedController?.uiViewController = self
+        let _ = self.view
     }
     
     required public init?(coder: NSCoder) {

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GM"
-  s.version      = "0.1.7"
+  s.version      = "0.1.8"
   s.summary      = "A package for develop ios application"
   s.homepage     = "https://github.com/shaokui-gu/GM"
   s.license      = 'MIT'
