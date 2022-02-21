@@ -39,10 +39,18 @@ public extension UIViewController {
     
     var enablePopGesture:Bool {
         set {
-            objc_setAssociatedObject(self, &PopGestureAssociateKeys.popGesture, newValue, .OBJC_ASSOCIATION_RETAIN)
+            if let navigation = self as? UINavigationController {
+                navigation.interactivePopGestureRecognizer?.isEnabled = enablePopGesture
+            } else {
+                objc_setAssociatedObject(self, &PopGestureAssociateKeys.popGesture, newValue, .OBJC_ASSOCIATION_RETAIN)
+            }
         }
         get {
-            return objc_getAssociatedObject(self, &PopGestureAssociateKeys.popGesture) as? Bool ?? true
+            if let navigation = self as? UINavigationController {
+                return navigation.interactivePopGestureRecognizer?.isEnabled ?? true
+            } else {
+                return objc_getAssociatedObject(self, &PopGestureAssociateKeys.popGesture) as? Bool ?? true
+            }
         }
     }
 }
@@ -65,7 +73,7 @@ open class GMPage : UIViewController, GMPageLifeCycle {
     
     final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = self.enablePopGesture
+        self.navigationController?.enablePopGesture = self.enablePopGesture
         self.onPageAppear()
     }
 
