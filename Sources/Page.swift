@@ -40,7 +40,7 @@ public extension UIViewController {
     var enablePopGesture:Bool {
         set {
             if let navigation = self as? UINavigationController {
-                navigation.interactivePopGestureRecognizer?.isEnabled = enablePopGesture
+                navigation.interactivePopGestureRecognizer?.isEnabled = newValue
             } else {
                 objc_setAssociatedObject(self, &PopGestureAssociateKeys.popGesture, newValue, .OBJC_ASSOCIATION_RETAIN)
             }
