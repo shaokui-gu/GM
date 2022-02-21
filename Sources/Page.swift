@@ -31,6 +31,22 @@ public protocol GMViewEventProtocol {
     
 }
 
+public extension UIViewController {
+
+    struct PopGestureAssociateKeys {
+        static var popGesture = "popGestureKey"
+    }
+    
+    var enablePopGesture:Bool {
+        set {
+            objc_setAssociatedObject(self, &PopGestureAssociateKeys.popGesture, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+        get {
+            return objc_getAssociatedObject(self, &PopGestureAssociateKeys.popGesture) as? Bool ?? true
+        }
+    }
+}
+
 open class GMPage : UIViewController, GMPageLifeCycle {
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -49,6 +65,7 @@ open class GMPage : UIViewController, GMPageLifeCycle {
     
     final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = self.enablePopGesture
         self.onPageAppear()
     }
 
@@ -82,7 +99,7 @@ open class GMPage : UIViewController, GMPageLifeCycle {
     
 }
  
-open class GMNavigationPage : UINavigationController, GMPageLifeCycle {
+open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGestureRecognizerDelegate {
     
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)

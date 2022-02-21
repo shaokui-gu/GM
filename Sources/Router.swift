@@ -104,8 +104,11 @@ open class Router {
         /// 界面跳转时是否带动画
         public var animated:Bool
         
-        public init(name:String, page:@escaping ([String : Any ]?) -> UIViewController, transition:UIModalTransitionStyle? = nil, presentation:UIModalPresentationStyle? = nil, animated:Bool = true) {
+        public var enablePopGesture:Bool
+        
+        public init(name:String, page:@escaping ([String : Any ]?) -> UIViewController, enablePopGesture:Bool = true, transition:UIModalTransitionStyle? = nil, presentation:UIModalPresentationStyle? = nil, animated:Bool = true) {
             self.name = name
+            self.enablePopGesture = enablePopGesture
             self.page = page
             self.transition = transition
             self.presentation = presentation
@@ -226,6 +229,7 @@ open class Router {
         try delegate?.routerWillChange(from, to: name, params: params, direction: .forward, transitionType: .push)
         
         let viewController = routePage.page(params)
+        viewController.enablePopGesture = routePage.enablePopGesture
         let page = Router.Page(name, id: id, controller: viewController)
         navigation.pushViewController(viewController, animated: animated ?? routePage.animated)
         GM.log(GM.RouteLogPrefix, "\(viewController.description)进入路由")
@@ -262,6 +266,7 @@ open class Router {
         let currentPage = self.current
         let currentPageIdx = self.routes.count - 1
         let viewController = routePage.page(params)
+        viewController.enablePopGesture = routePage.enablePopGesture
         let page = Router.Page(name, id: id, controller: viewController)
         navigation.pushViewController(viewController, animated: animated ?? routePage.animated)
         GM.log(GM.RouteLogPrefix, "\(viewController.description)进入路由")
@@ -416,7 +421,7 @@ open class Router {
 
 public extension UIViewController {
     
-    struct AssociatedKeys {
+    struct RouterAssociatedKeys {
         static var paramsKey = "params_key"
         static var isModalViewController = "is_model_view_controller"
         static var routePageIdentifire = "route_page_identifire"
@@ -424,28 +429,28 @@ public extension UIViewController {
     
     var isModalViewController:Bool {
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.isModalViewController, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &RouterAssociatedKeys.isModalViewController, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.isModalViewController) as? Bool ?? false
+            return objc_getAssociatedObject(self, &RouterAssociatedKeys.isModalViewController) as? Bool ?? false
         }
     }
     
     var routeIdentifire:String? {
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.routePageIdentifire, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &RouterAssociatedKeys.routePageIdentifire, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.routePageIdentifire) as? String
+            return objc_getAssociatedObject(self, &RouterAssociatedKeys.routePageIdentifire) as? String
         }
     }
     
     var params:[String : Any ]? {
         set {
-            objc_setAssociatedObject(self, &AssociatedKeys.paramsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &RouterAssociatedKeys.paramsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            return objc_getAssociatedObject(self, &AssociatedKeys.paramsKey) as? [String : Any]
+            return objc_getAssociatedObject(self, &RouterAssociatedKeys.paramsKey) as? [String : Any]
         }
     }
 }
