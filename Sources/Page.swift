@@ -256,14 +256,14 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGesture
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
-    public func applicationDidBecomeActive(_ application: UIApplication) {}
-    public func applicationWillResignActive(_ application: UIApplication) {}
-    public func applicationDidEnterBackground(_ application: UIApplication) {}
-    public func applicationWillEnterForeground(_ application: UIApplication) {}
-    public func sceneDidBecomeActive() {}
-    public func sceneWillResignActive() {}
-    public func sceneWillEnterForeground() {}
-    public func sceneDidEnterBackground() {}
+    open func applicationDidBecomeActive(_ application: UIApplication) {}
+    open func applicationWillResignActive(_ application: UIApplication) {}
+    open func applicationDidEnterBackground(_ application: UIApplication) {}
+    open func applicationWillEnterForeground(_ application: UIApplication) {}
+    open func sceneDidBecomeActive() {}
+    open func sceneWillResignActive() {}
+    open func sceneWillEnterForeground() {}
+    open func sceneDidEnterBackground() {}
 
 
 }
@@ -316,14 +316,14 @@ open class GMTabBarPage : UITabBarController, GMPageLifeCycle, GMAppLifeCycle, G
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
-    public func applicationDidBecomeActive(_ application: UIApplication) {}
-    public func applicationWillResignActive(_ application: UIApplication) {}
-    public func applicationDidEnterBackground(_ application: UIApplication) {}
-    public func applicationWillEnterForeground(_ application: UIApplication) {}
-    public func sceneDidBecomeActive() {}
-    public func sceneWillResignActive() {}
-    public func sceneWillEnterForeground() {}
-    public func sceneDidEnterBackground() {}
+    open func applicationDidBecomeActive(_ application: UIApplication) {}
+    open func applicationWillResignActive(_ application: UIApplication) {}
+    open func applicationDidEnterBackground(_ application: UIApplication) {}
+    open func applicationWillEnterForeground(_ application: UIApplication) {}
+    open func sceneDidBecomeActive() {}
+    open func sceneWillResignActive() {}
+    open func sceneWillEnterForeground() {}
+    open func sceneDidEnterBackground() {}
 
 
 }
@@ -376,14 +376,14 @@ open class GMListPage : UITableViewController, GMPageLifeCycle, GMAppLifeCycle, 
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
-    public func applicationDidBecomeActive(_ application: UIApplication) {}
-    public func applicationWillResignActive(_ application: UIApplication) {}
-    public func applicationDidEnterBackground(_ application: UIApplication) {}
-    public func applicationWillEnterForeground(_ application: UIApplication) {}
-    public func sceneDidBecomeActive() {}
-    public func sceneWillResignActive() {}
-    public func sceneWillEnterForeground() {}
-    public func sceneDidEnterBackground() {}
+    open func applicationDidBecomeActive(_ application: UIApplication) {}
+    open func applicationWillResignActive(_ application: UIApplication) {}
+    open func applicationDidEnterBackground(_ application: UIApplication) {}
+    open func applicationWillEnterForeground(_ application: UIApplication) {}
+    open func sceneDidBecomeActive() {}
+    open func sceneWillResignActive() {}
+    open func sceneWillEnterForeground() {}
+    open func sceneDidEnterBackground() {}
 
 }
 
@@ -435,14 +435,14 @@ open class GMGridPage : UICollectionViewController, GMPageLifeCycle, GMAppLifeCy
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
-    public func applicationDidBecomeActive(_ application: UIApplication) {}
-    public func applicationWillResignActive(_ application: UIApplication) {}
-    public func applicationDidEnterBackground(_ application: UIApplication) {}
-    public func applicationWillEnterForeground(_ application: UIApplication) {}
-    public func sceneDidBecomeActive() {}
-    public func sceneWillResignActive() {}
-    public func sceneWillEnterForeground() {}
-    public func sceneDidEnterBackground() {}
+    open func applicationDidBecomeActive(_ application: UIApplication) {}
+    open func applicationWillResignActive(_ application: UIApplication) {}
+    open func applicationDidEnterBackground(_ application: UIApplication) {}
+    open func applicationWillEnterForeground(_ application: UIApplication) {}
+    open func sceneDidBecomeActive() {}
+    open func sceneWillResignActive() {}
+    open func sceneWillEnterForeground() {}
+    open func sceneDidEnterBackground() {}
 }
 
 /// Swift UI
@@ -492,21 +492,14 @@ open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMAppLifeCycle, 
     /// 取消
     open func touchesCancel() {}
     
-    public func applicationDidBecomeActive(_ application: UIApplication) {}
-    
-    public func applicationWillResignActive(_ application: UIApplication) {}
-    
-    public func applicationDidEnterBackground(_ application: UIApplication) {}
-    
-    public func applicationWillEnterForeground(_ application: UIApplication) {}
-    
-    public func sceneDidBecomeActive() {}
-    
-    public func sceneWillResignActive() {}
-    
-    public func sceneWillEnterForeground() {}
-    
-    public func sceneDidEnterBackground() {}
+    open func applicationDidBecomeActive(_ application: UIApplication) {}
+    open func applicationWillResignActive(_ application: UIApplication) {}
+    open func applicationDidEnterBackground(_ application: UIApplication) {}
+    open func applicationWillEnterForeground(_ application: UIApplication) {}
+    open func sceneDidBecomeActive() {}
+    open func sceneWillResignActive() {}
+    open func sceneWillEnterForeground() {}
+    open func sceneDidEnterBackground() {}
 }
 
 @available(iOS 13.0, *)
