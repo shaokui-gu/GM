@@ -185,6 +185,7 @@ open class GMPage : UIViewController, GMPageLifeCycle,GMAppLifeCycle, GMAppScene
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         if let identifire = self.routeIdentifire {
             Router.shared.removePage(identifire)
         }
@@ -244,6 +245,7 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGesture
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         if let identifire = self.routeIdentifire {
             Router.shared.removePage(identifire)
         }
@@ -304,6 +306,7 @@ open class GMTabBarPage : UITabBarController, GMPageLifeCycle, GMAppLifeCycle, G
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         if let identifire = self.routeIdentifire {
             Router.shared.removePage(identifire)
         }
@@ -364,6 +367,7 @@ open class GMListPage : UITableViewController, GMPageLifeCycle, GMAppLifeCycle, 
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         if let identifire = self.routeIdentifire {
             Router.shared.removePage(identifire)
         }
@@ -423,6 +427,7 @@ open class GMGridPage : UICollectionViewController, GMPageLifeCycle, GMAppLifeCy
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         if let identifire = self.routeIdentifire {
             Router.shared.removePage(identifire)
         }
@@ -546,6 +551,9 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     }
     
     deinit {
+        if let controller = self.rootView.observedController {
+            NotificationCenter.default.removeObserver(controller)
+        }
         if let identifire = self.routeIdentifire {
             Router.shared.removePage(identifire)
         }
