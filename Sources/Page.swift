@@ -9,6 +9,24 @@
 import Foundation
 import SwiftUI
 
+public protocol GMAppSceneCycle {
+    @available(iOS 13.0, *)
+    func sceneDidBecomeActive() -> Void
+    @available(iOS 13.0, *)
+    func sceneWillResignActive() -> Void
+    @available(iOS 13.0, *)
+    func sceneWillEnterForeground() -> Void
+    @available(iOS 13.0, *)
+    func sceneDidEnterBackground() -> Void
+}
+
+public protocol GMAppLifeCycle {
+    func applicationDidBecomeActive(_ application: UIApplication) -> Void
+    func applicationWillResignActive(_ application: UIApplication) -> Void
+    func applicationDidEnterBackground(_ application: UIApplication) -> Void
+    func applicationWillEnterForeground(_ application: UIApplication) -> Void
+}
+
 public protocol GMPageLifeCycle {
     func onPageAppear() -> Void
     func onPageDisappear()  -> Void
@@ -16,6 +34,81 @@ public protocol GMPageLifeCycle {
     func onPageLoaded() -> Void
     func onPageDestroy() -> Void
     func onPageBoundsUpdated(_ bounds:CGRect) -> Void
+}
+
+fileprivate extension NSObject {
+    
+    func registerApplocationLifecycleNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidBecomeActiveNofify), name: UIApplication.didBecomeActiveNotification, object: UIApplication.shared)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActiveNofify), name: UIApplication.willResignActiveNotification, object: UIApplication.shared)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackgroundNofify), name: UIApplication.didEnterBackgroundNotification, object: UIApplication.shared)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActiveNofify), name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
+        
+        
+        if #available(iOS 13.0, *) {
+            NotificationCenter.default.addObserver(self, selector: #selector(sceneWillResignActiveNofify), name: UIScene.willDeactivateNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(sceneWillEnterForegroundNofify), name: UIScene.willEnterForegroundNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(sceneDidBecomeActiveNofify), name: UIScene.didActivateNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(sceneDidEnterBackgroundNofify), name: UIScene.didEnterBackgroundNotification, object: nil)
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    @objc func applicationDidBecomeActiveNofify() {
+        if let app = self as? GMAppLifeCycle {
+            app.applicationDidBecomeActive(UIApplication.shared)
+        }
+    }
+
+    @objc func applicationWillResignActiveNofify() {
+        if let app = self as? GMAppLifeCycle {
+            app.applicationWillResignActive(UIApplication.shared)
+        }
+    }
+
+    @objc func applicationDidEnterBackgroundNofify() {
+        if let app = self as? GMAppLifeCycle {
+            app.applicationDidEnterBackground(UIApplication.shared)
+        }
+    }
+
+    @objc func applicationWillEnterForegroundNofify() {
+        if let app = self as? GMAppLifeCycle {
+            app.applicationWillEnterForeground(UIApplication.shared)
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    @objc func sceneDidBecomeActiveNofify() {
+        if let scene = self as? GMAppSceneCycle {
+            scene.sceneDidBecomeActive()
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    @objc func sceneWillResignActiveNofify() {
+        if let scene = self as? GMAppSceneCycle {
+            scene.sceneWillResignActive()
+        }
+    }
+
+    @available(iOS 13.0, *)
+    @objc func sceneDidEnterBackgroundNofify() {
+        if let scene = self as? GMAppSceneCycle {
+            scene.sceneDidEnterBackground()
+        }
+    }
+
+    @available(iOS 13.0, *)
+    @objc func sceneWillEnterForegroundNofify() {
+        if let scene = self as? GMAppSceneCycle {
+            scene.sceneWillEnterForeground()
+        }
+    }
 }
 
 public protocol GMViewEventProtocol {
@@ -55,10 +148,11 @@ public extension UIViewController {
     }
 }
 
-open class GMPage : UIViewController, GMPageLifeCycle {
+open class GMPage : UIViewController, GMPageLifeCycle,GMAppLifeCycle, GMAppSceneCycle {
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.registerApplocationLifecycleNotification()
         self.onPageInit()
     }
     
@@ -103,14 +197,22 @@ open class GMPage : UIViewController, GMPageLifeCycle {
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
-
+    public func applicationDidBecomeActive(_ application: UIApplication) {}
+    public func applicationWillResignActive(_ application: UIApplication) {}
+    public func applicationDidEnterBackground(_ application: UIApplication) {}
+    public func applicationWillEnterForeground(_ application: UIApplication) {}
+    public func sceneDidBecomeActive() {}
+    public func sceneWillResignActive() {}
+    public func sceneWillEnterForeground() {}
+    public func sceneDidEnterBackground() {}
     
 }
  
-open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGestureRecognizerDelegate {
+open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGestureRecognizerDelegate, GMAppLifeCycle, GMAppSceneCycle {
     
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
+        self.registerApplocationLifecycleNotification()
         self.onPageInit()
     }
     
@@ -154,13 +256,23 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGesture
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
+    public func applicationDidBecomeActive(_ application: UIApplication) {}
+    public func applicationWillResignActive(_ application: UIApplication) {}
+    public func applicationDidEnterBackground(_ application: UIApplication) {}
+    public func applicationWillEnterForeground(_ application: UIApplication) {}
+    public func sceneDidBecomeActive() {}
+    public func sceneWillResignActive() {}
+    public func sceneWillEnterForeground() {}
+    public func sceneDidEnterBackground() {}
+
 
 }
 
-open class GMTabBarPage : UITabBarController, GMPageLifeCycle {
+open class GMTabBarPage : UITabBarController, GMPageLifeCycle, GMAppLifeCycle, GMAppSceneCycle {
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.registerApplocationLifecycleNotification()
         self.onPageInit()
     }
     
@@ -204,13 +316,23 @@ open class GMTabBarPage : UITabBarController, GMPageLifeCycle {
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
+    public func applicationDidBecomeActive(_ application: UIApplication) {}
+    public func applicationWillResignActive(_ application: UIApplication) {}
+    public func applicationDidEnterBackground(_ application: UIApplication) {}
+    public func applicationWillEnterForeground(_ application: UIApplication) {}
+    public func sceneDidBecomeActive() {}
+    public func sceneWillResignActive() {}
+    public func sceneWillEnterForeground() {}
+    public func sceneDidEnterBackground() {}
+
 
 }
 
-open class GMListPage : UITableViewController, GMPageLifeCycle {
+open class GMListPage : UITableViewController, GMPageLifeCycle, GMAppLifeCycle, GMAppSceneCycle {
     
     public override init(style: UITableView.Style) {
         super.init(style: style)
+        self.registerApplocationLifecycleNotification()
         self.onPageInit()
     }
     
@@ -254,12 +376,22 @@ open class GMListPage : UITableViewController, GMPageLifeCycle {
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
+    public func applicationDidBecomeActive(_ application: UIApplication) {}
+    public func applicationWillResignActive(_ application: UIApplication) {}
+    public func applicationDidEnterBackground(_ application: UIApplication) {}
+    public func applicationWillEnterForeground(_ application: UIApplication) {}
+    public func sceneDidBecomeActive() {}
+    public func sceneWillResignActive() {}
+    public func sceneWillEnterForeground() {}
+    public func sceneDidEnterBackground() {}
+
 }
 
-open class GMGridPage : UICollectionViewController, GMPageLifeCycle {
+open class GMGridPage : UICollectionViewController, GMPageLifeCycle, GMAppLifeCycle, GMAppSceneCycle {
     
     public override init(collectionViewLayout layout: UICollectionViewLayout) {
         super.init(collectionViewLayout: layout)
+        self.registerApplocationLifecycleNotification()
         self.onPageInit()
     }
     
@@ -303,6 +435,14 @@ open class GMGridPage : UICollectionViewController, GMPageLifeCycle {
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
+    public func applicationDidBecomeActive(_ application: UIApplication) {}
+    public func applicationWillResignActive(_ application: UIApplication) {}
+    public func applicationDidEnterBackground(_ application: UIApplication) {}
+    public func applicationWillEnterForeground(_ application: UIApplication) {}
+    public func sceneDidBecomeActive() {}
+    public func sceneWillResignActive() {}
+    public func sceneWillEnterForeground() {}
+    public func sceneDidEnterBackground() {}
 }
 
 /// Swift UI
@@ -327,7 +467,8 @@ public extension GMSwiftUIPageView {
     }
 }
 
-open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProtocol {
+open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMAppLifeCycle, GMAppSceneCycle, GMViewEventProtocol {
+    
     public weak fileprivate(set) var uiViewController:UIViewController?
     public weak fileprivate(set) var uiView:UIView?
     /// 绑定页面的bounds
@@ -350,7 +491,22 @@ open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMViewEventProto
     open func touchesEnd() {}
     /// 取消
     open func touchesCancel() {}
-
+    
+    public func applicationDidBecomeActive(_ application: UIApplication) {}
+    
+    public func applicationWillResignActive(_ application: UIApplication) {}
+    
+    public func applicationDidEnterBackground(_ application: UIApplication) {}
+    
+    public func applicationWillEnterForeground(_ application: UIApplication) {}
+    
+    public func sceneDidBecomeActive() {}
+    
+    public func sceneWillResignActive() {}
+    
+    public func sceneWillEnterForeground() {}
+    
+    public func sceneDidEnterBackground() {}
 }
 
 @available(iOS 13.0, *)
@@ -360,6 +516,7 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
         super.init(rootView: rootView)
         rootView.observedController?.uiViewController = self
         rootView.observedController?.uiView = self.view
+        rootView.observedController?.registerApplocationLifecycleNotification()
         rootView.observedController?.onPageInit()
         rootView.observedController?.onPageLoaded()
     }
