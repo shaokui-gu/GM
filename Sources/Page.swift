@@ -33,6 +33,10 @@ public protocol GMPageLifeCycle {
     func onPageInit() -> Void
     func onPageLoaded() -> Void
     func onPageDestroy() -> Void
+}
+
+public protocol GMPageAppearan {
+    var preferredStatusBarStyle: UIStatusBarStyle { get }
     func onPageBoundsUpdated(_ bounds:CGRect) -> Void
 }
 
@@ -150,6 +154,10 @@ public extension UIViewController {
 
 open class GMPage : UIViewController, GMPageLifeCycle,GMAppLifeCycle, GMAppSceneCycle {
     
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.preferredStatusBarStyle
+    }
+    
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.registerApplocationLifecycleNotification()
@@ -184,6 +192,11 @@ open class GMPage : UIViewController, GMPageLifeCycle,GMAppLifeCycle, GMAppScene
         self.onPageDisappear()
     }
     
+    final public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.onPageBoundsUpdated(self.view.bounds)
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
         if let identifire = self.routeIdentifire {
@@ -210,6 +223,10 @@ open class GMPage : UIViewController, GMPageLifeCycle,GMAppLifeCycle, GMAppScene
 }
  
 open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGestureRecognizerDelegate, GMAppLifeCycle, GMAppSceneCycle {
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.preferredStatusBarStyle
+    }
     
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
@@ -244,6 +261,11 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGesture
         self.onPageDisappear()
     }
     
+    final public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.onPageBoundsUpdated(self.view.bounds)
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
         if let identifire = self.routeIdentifire {
@@ -271,6 +293,10 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGesture
 }
 
 open class GMTabBarPage : UITabBarController, GMPageLifeCycle, GMAppLifeCycle, GMAppSceneCycle {
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.preferredStatusBarStyle
+    }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -303,6 +329,12 @@ open class GMTabBarPage : UITabBarController, GMPageLifeCycle, GMAppLifeCycle, G
     final public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.onPageDisappear()
+    }
+    
+    
+    final public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.onPageBoundsUpdated(self.view.bounds)
     }
     
     deinit {
@@ -366,6 +398,12 @@ open class GMListPage : UITableViewController, GMPageLifeCycle, GMAppLifeCycle, 
         self.onPageDisappear()
     }
     
+    
+    final public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.onPageBoundsUpdated(self.view.bounds)
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
         if let identifire = self.routeIdentifire {
@@ -426,6 +464,11 @@ open class GMGridPage : UICollectionViewController, GMPageLifeCycle, GMAppLifeCy
         self.onPageDisappear()
     }
     
+    final public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.onPageBoundsUpdated(self.view.bounds)
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
         if let identifire = self.routeIdentifire {
@@ -472,9 +515,14 @@ public extension GMSwiftUIPageView {
     }
 }
 
-open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMAppLifeCycle, GMAppSceneCycle, GMViewEventProtocol {
+open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMAppLifeCycle, GMAppSceneCycle, GMViewEventProtocol, GMPageAppearan {
+    
+    public var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
     
     public weak fileprivate(set) var uiViewController:UIViewController?
+    
     public weak fileprivate(set) var uiView:UIView?
     /// 绑定页面的bounds
     public fileprivate(set) var bounds:CGRect = .zero
@@ -510,6 +558,10 @@ open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMAppLifeCycle, 
 @available(iOS 13.0, *)
 open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: GMSwiftUIPageView {
   
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return rootView.observedController?.preferredStatusBarStyle ?? .default
+    }
+    
     public override init(rootView: Content) {
         super.init(rootView: rootView)
         rootView.observedController?.uiViewController = self
