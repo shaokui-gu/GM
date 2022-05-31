@@ -154,10 +154,6 @@ public extension UIViewController {
 
 open class GMPage : UIViewController, GMPageLifeCycle,GMAppLifeCycle, GMAppSceneCycle {
     
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.preferredStatusBarStyle
-    }
-    
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.registerApplocationLifecycleNotification()
@@ -224,10 +220,6 @@ open class GMPage : UIViewController, GMPageLifeCycle,GMAppLifeCycle, GMAppScene
  
 open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGestureRecognizerDelegate, GMAppLifeCycle, GMAppSceneCycle {
     
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.preferredStatusBarStyle
-    }
-    
     public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         self.registerApplocationLifecycleNotification()
@@ -293,10 +285,6 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGesture
 }
 
 open class GMTabBarPage : UITabBarController, GMPageLifeCycle, GMAppLifeCycle, GMAppSceneCycle {
-    
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return self.preferredStatusBarStyle
-    }
     
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
