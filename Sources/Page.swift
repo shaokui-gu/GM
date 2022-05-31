@@ -517,15 +517,15 @@ public extension GMSwiftUIPageView {
 
 open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMAppLifeCycle, GMAppSceneCycle, GMViewEventProtocol, GMPageAppearan {
     
-    public var preferredStatusBarStyle: UIStatusBarStyle {
+    open var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
     
-    public weak fileprivate(set) var uiViewController:UIViewController?
+    open weak fileprivate(set) var uiViewController:UIViewController?
     
-    public weak fileprivate(set) var uiView:UIView?
+    open weak fileprivate(set) var uiView:UIView?
     /// 绑定页面的bounds
-    public fileprivate(set) var bounds:CGRect = .zero
+    open fileprivate(set) var bounds:CGRect = .zero
     
     open func onPageBoundsUpdated(_ bounds: CGRect) {
         self.bounds = bounds
