@@ -406,7 +406,7 @@ open class Router {
             controller.dismiss(animated: animated, completion: completed ? completion : nil)
             let subIndex:Int = subRoutes.firstIndex(of: page) ?? 0
             if controller is UINavigationController {
-                self.routes.removeLast(subIndex)
+                self.routes.removeLast(subIndex + 1)
             }
         }
         if !completed {
