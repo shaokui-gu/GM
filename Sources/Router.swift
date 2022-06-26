@@ -70,12 +70,8 @@ open class Router {
     /// 导航
     class Navigator {
         static let shared = Router.Navigator()
-        fileprivate var rootNavigation:UINavigationController? {
-            return  UIApplication.shared.getFirstKeyWindow?.rootViewController as? UINavigationController
-        }
-        fileprivate var root:UIViewController? {
-            return UIApplication.shared.getFirstKeyWindow?.rootViewController
-        }
+        fileprivate(set) var rootNavigation:UINavigationController? = UIApplication.shared.getFirstKeyWindow?.rootViewController as? UINavigationController
+        fileprivate(set) var root:UIViewController? = UIApplication.shared.getFirstKeyWindow?.rootViewController
         fileprivate weak var topNavigation:UINavigationController? {
             let current = Router.shared.current?.controller
             if let current = current as? UINavigationController {
@@ -460,7 +456,7 @@ extension GM {
     public static let RouteErrorLogPrefix = "【 ROUTER ERROR 】:"
     
     public static let RouteLogPrefix = "【 ROUTER 】:"
-
+        
     public static var routes:[Router.Page] {
         return Router.shared.routes
     }
@@ -472,6 +468,16 @@ extension GM {
     /// 注册
     public static func registerPages(_ pages:[Router.RoutePage]) {
         Router.shared.registerPages(pages)
+    }
+    
+    /// 根ViewController
+    public static func setRouteViewController(_ controller:UIViewController) {
+        Router.shared.navigator.root = controller
+    }
+    
+    /// 根NavigationController
+    public static func setRouteNavigationController(_ controller:UINavigationController) {
+        Router.shared.navigator.rootNavigation = controller
     }
     
     /// 代理
