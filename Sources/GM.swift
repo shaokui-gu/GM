@@ -21,7 +21,7 @@ open class GMWindow : UIWindow {
         }
     }
     
-    open func setRootPage(_ name:String, params:[String : Any]? = nil) {
+    open func setRootPage(_ name:String, params:[String : Any]? = nil, useNavigation:Bool = true) {
         guard let rootPage = Router.shared.routePageFor(name) else {
             assertionFailure("\(name) 页面未注册")
             return
@@ -29,7 +29,11 @@ open class GMWindow : UIWindow {
         let controller = rootPage.page(params)
         let page = Router.Page(name, id:0, controller: controller)
         GM.setRoot(page)
-        super.rootViewController = GMNavigationPage(rootViewController: controller)
+        if useNavigation {
+            super.rootViewController = GMNavigationPage(rootViewController: controller)
+        } else {
+            super.rootViewController = controller
+        }
     }
 }
 
