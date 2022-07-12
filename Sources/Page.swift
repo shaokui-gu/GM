@@ -226,6 +226,10 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGesture
         self.onPageInit()
     }
     
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return self.topViewController?.preferredStatusBarStyle ?? .default
+    }
+    
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
