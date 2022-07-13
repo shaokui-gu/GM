@@ -171,12 +171,12 @@ open class GMPage : UIViewController, GMPageLifeCycle,GMAppLifeCycle, GMAppScene
     
     final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.enablePopGesture = self.enablePopGesture
         self.onPageAppear()
     }
 
     final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.enablePopGesture = self.enablePopGesture
     }
     
     final public override func viewDidDisappear(_ animated: Bool) {
@@ -241,12 +241,12 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGesture
     
     final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.enablePopGesture = self.enablePopGesture
         self.onPageAppear()
     }
 
     final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.enablePopGesture = self.enablePopGesture
     }
     
     final public override func viewDidDisappear(_ animated: Bool) {
@@ -308,12 +308,12 @@ open class GMTabBarPage : UITabBarController, GMPageLifeCycle, GMAppLifeCycle, G
     
     final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.enablePopGesture = self.enablePopGesture
         self.onPageAppear()
     }
 
     final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.enablePopGesture = self.enablePopGesture
     }
     
     final public override func viewDidDisappear(_ animated: Bool) {
@@ -376,12 +376,12 @@ open class GMListPage : UITableViewController, GMPageLifeCycle, GMAppLifeCycle, 
     
     final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.enablePopGesture = self.enablePopGesture
         self.onPageAppear()
     }
 
     final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.enablePopGesture = self.enablePopGesture
     }
     
     final public override func viewDidDisappear(_ animated: Bool) {
@@ -443,12 +443,12 @@ open class GMGridPage : UICollectionViewController, GMPageLifeCycle, GMAppLifeCy
     
     final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.enablePopGesture = self.enablePopGesture
         self.onPageAppear()
     }
 
     final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.enablePopGesture = self.enablePopGesture
     }
     
     final public override func viewDidDisappear(_ animated: Bool) {
@@ -577,12 +577,12 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
     
     final public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.enablePopGesture = self.enablePopGesture
         rootView.observedController?.onPageAppear()
     }
 
     final public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.enablePopGesture = self.enablePopGesture
     }
     
     final public override func viewDidDisappear(_ animated: Bool) {
