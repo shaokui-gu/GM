@@ -42,7 +42,8 @@
 GM 制定了一套简洁的命名路由管理系统来管理界面跳转
 
 ```
-var pages = [
+class AppPages {
+  var pages = [
         Router.RoutePage(
             name:"/",
             page: { params in
@@ -56,6 +57,7 @@ var pages = [
             }
         )
         ]
+}
 ```
 
 想要使用它你首先需要:
