@@ -43,7 +43,7 @@ GM 制定了一套简洁的命名路由管理系统来管理界面跳转
 
 ```
 class AppPages {
-  var pages = [
+  static let pages = [
         Router.RoutePage(
             name:"/",
             page: { params in
