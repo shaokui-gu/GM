@@ -207,14 +207,14 @@ open class GMPage : UIViewController, GMPageLifeCycle,GMAppLifeCycle, GMAppScene
     open func onPageInit() -> Void {}
     open func onPageDestroy() -> Void {}
     open func onPageBoundsUpdated(_ bounds: CGRect) {}
-    public func applicationDidBecomeActive(_ application: UIApplication) {}
-    public func applicationWillResignActive(_ application: UIApplication) {}
-    public func applicationDidEnterBackground(_ application: UIApplication) {}
-    public func applicationWillEnterForeground(_ application: UIApplication) {}
-    public func sceneDidBecomeActive() {}
-    public func sceneWillResignActive() {}
-    public func sceneWillEnterForeground() {}
-    public func sceneDidEnterBackground() {}
+    open func applicationDidBecomeActive(_ application: UIApplication) {}
+    open func applicationWillResignActive(_ application: UIApplication) {}
+    open func applicationDidEnterBackground(_ application: UIApplication) {}
+    open func applicationWillEnterForeground(_ application: UIApplication) {}
+    open func sceneDidBecomeActive() {}
+    open func sceneWillResignActive() {}
+    open func sceneWillEnterForeground() {}
+    open func sceneDidEnterBackground() {}
     
 }
  
