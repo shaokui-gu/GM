@@ -565,6 +565,7 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
         rootView.observedController?.registerApplocationLifecycleNotification()
         rootView.observedController?.onPageInit()
         rootView.observedController?.onPageLoaded()
+        self.view.backgroundColor = .clear
     }
     
     required public init?(coder: NSCoder) {
