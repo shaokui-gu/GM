@@ -49,7 +49,7 @@ fileprivate extension NSObject {
         
         NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterBackgroundNofify), name: UIApplication.didEnterBackgroundNotification, object: UIApplication.shared)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillResignActiveNofify), name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationWillEnterForegroundNofify), name: UIApplication.willEnterForegroundNotification, object: UIApplication.shared)
         
         
         if #available(iOS 13.0, *) {

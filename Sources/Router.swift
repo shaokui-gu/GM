@@ -145,18 +145,29 @@ open class Router {
     /// 所有已进入路由页面
     private(set) var routes:[Router.Page] = []
     
+    private var _root:Router.Page?
+    
     /// 根页面
     fileprivate(set) var root:Router.Page? {
-        didSet {
+        set {
             guard routes.count == 0 else {
                 assertionFailure("根页面不可修改")
                 return
             }
-            guard let page = root else {
+            guard let page = newValue else {
                 assertionFailure("根页面不可设置为空")
                 return
             }
+            _root = newValue
             routes.append(page)
+        }
+        get {
+            if _root == nil {
+                _root = routes.first(where: { page in
+                    return page.name == "/"
+                })
+            }
+            return _root
         }
     }
     
