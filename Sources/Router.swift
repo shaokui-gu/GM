@@ -572,7 +572,7 @@ extension GM {
 }
 
 extension GMWindow {
-    func setRootPage(_ name:String, params:[String : Any]? = nil) {
+    public func setRootPage(_ name:String, params:[String : Any]? = nil) {
         guard let rootPage = Router.shared.routePageFor(name) else {
             assertionFailure("\(name) 页面未注册")
             return
