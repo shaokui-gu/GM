@@ -162,11 +162,6 @@ open class Router {
             routes.append(page)
         }
         get {
-            if _root == nil {
-                _root = routes.first(where: { page in
-                    return page.name == "/"
-                })
-            }
             return _root
         }
     }
@@ -494,12 +489,12 @@ extension GM {
     }
     
     /// 根ViewController
-    public static func setRouteViewController(_ controller:UIViewController) {
+    public static func setNavigationRootViewController(_ controller:UIViewController) {
         Router.shared.navigator.root = controller
     }
     
     /// 根NavigationController
-    public static func setRouteNavigationController(_ controller:UINavigationController) {
+    public static func setRootNavigationController(_ controller:UINavigationController) {
         Router.shared.navigator.rootNavigation = controller
     }
     
@@ -519,10 +514,6 @@ extension GM {
     
     public static func topPage() -> Router.Page? {
         return Router.shared.current
-    }
-    
-    public static func setRoot(_ page:Router.Page) {
-        Router.shared.root = page
     }
     
     public static func removePage(_ identifire:String) {
@@ -577,5 +568,18 @@ extension GM {
                 self.log(RouteErrorLogPrefix ,error.msg)
             }
         }
+    }
+}
+
+extension GMWindow {
+    func setRootPage(_ name:String, params:[String : Any]? = nil) {
+        guard let rootPage = Router.shared.routePageFor(name) else {
+            assertionFailure("\(name) 页面未注册")
+            return
+        }
+        let controller = rootPage.page(params)
+        let page = Router.Page(name, id: 0, controller: controller)
+        Router.shared.root = page
+        super.rootViewController = controller
     }
 }

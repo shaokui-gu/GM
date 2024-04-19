@@ -20,15 +20,6 @@ open class GMWindow : UIWindow {
             assertionFailure("不可操作")
         }
     }
-    
-    open func setRootPage(_ name:String, params:[String : Any]? = nil) {
-        guard let rootPage = Router.shared.routePageFor(name) else {
-            assertionFailure("\(name) 页面未注册")
-            return
-        }
-        let controller = rootPage.page(params)
-        super.rootViewController = controller
-    }
 }
 
 open class GMAppDelegate : UIResponder, UIApplicationDelegate {
