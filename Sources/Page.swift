@@ -37,6 +37,7 @@ public protocol GMPageLifeCycle {
 
 public protocol GMPageAppearan {
     var preferredStatusBarStyle: UIStatusBarStyle { get }
+    var preferredStatusBarHidden: Bool { get }
     func onPageBoundsUpdated(_ bounds:CGRect) -> Void
 }
 
@@ -228,6 +229,10 @@ open class GMNavigationPage : UINavigationController, GMPageLifeCycle, UIGesture
     
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return self.topViewController?.preferredStatusBarStyle ?? .default
+    }
+    
+    open override var prefersStatusBarHidden: Bool {
+        return self.topViewController?.prefersStatusBarHidden ?? false
     }
     
     required public init?(coder: NSCoder) {
@@ -517,6 +522,10 @@ open class GMSwiftUIPageController : NSObject, GMPageLifeCycle, GMAppLifeCycle, 
         return .default
     }
     
+    open var preferredStatusBarHidden: Bool {
+        return false
+    }
+    
     open weak fileprivate(set) var uiViewController:UIViewController?
     
     open weak fileprivate(set) var uiView:UIView?
@@ -556,6 +565,10 @@ open class GMSwiftUIPage<Content> : UIHostingController<Content> where Content: 
   
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return rootView.observedController?.preferredStatusBarStyle ?? .default
+    }
+    
+    open override var prefersStatusBarHidden: Bool {
+        return rootView.observedController?.preferredStatusBarHidden ?? false
     }
     
     public override init(rootView: Content) {

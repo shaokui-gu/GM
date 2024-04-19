@@ -436,28 +436,40 @@ public extension UIViewController {
     
     var isModalViewController:Bool {
         set {
-            objc_setAssociatedObject(self, &RouterAssociatedKeys.isModalViewController, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            withUnsafePointer(to: &RouterAssociatedKeys.isModalViewController) {
+                objc_setAssociatedObject(self, $0, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
         }
         get {
-            return objc_getAssociatedObject(self, &RouterAssociatedKeys.isModalViewController) as? Bool ?? false
+            withUnsafePointer(to: &RouterAssociatedKeys.isModalViewController) {
+                return objc_getAssociatedObject(self, $0) as? Bool ?? false
+            }
         }
     }
     
     var routeIdentifire:String? {
         set {
-            objc_setAssociatedObject(self, &RouterAssociatedKeys.routePageIdentifire, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            withUnsafePointer(to: &RouterAssociatedKeys.routePageIdentifire) {
+                objc_setAssociatedObject(self, $0, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
         }
         get {
-            return objc_getAssociatedObject(self, &RouterAssociatedKeys.routePageIdentifire) as? String
+            withUnsafePointer(to: &RouterAssociatedKeys.routePageIdentifire) {
+                return objc_getAssociatedObject(self, $0) as? String
+            }
         }
     }
     
     var params:[String : Any ]? {
         set {
-            objc_setAssociatedObject(self, &RouterAssociatedKeys.paramsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            withUnsafePointer(to: &RouterAssociatedKeys.paramsKey) {
+                objc_setAssociatedObject(self, $0, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            }
         }
         get {
-            return objc_getAssociatedObject(self, &RouterAssociatedKeys.paramsKey) as? [String : Any]
+            withUnsafePointer(to: &RouterAssociatedKeys.routePageIdentifire) {
+                return objc_getAssociatedObject(self, $0) as? [String : Any]
+            }
         }
     }
 }
